@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default should return a validation error when the value is invalid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "responses[200].response.content[application/json].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Default should return no errors when the value is valid 1`] = `Array []`;
+
+exports[`Empty should return no errors 1`] = `Array []`;
+
+exports[`Exact should return a validation error when the value is invalid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "responses[200].response.content[application/json].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Exact should return no errors when the value is valid 1`] = `Array []`;
+
+exports[`Wildcard should return a validation error when the value is valid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "responses[200].response.content[application/json].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Wildcard should return no errors when the value is defined 1`] = `Array []`;

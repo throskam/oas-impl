@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Allow empty value should return no errors when the value is null 1`] = `Array []`;
+
+exports[`Content should return a validation error when the value is invalid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "parameter[param].content[application/json].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Content should return no errors when the value is valid 1`] = `Array []`;
+
+exports[`Deprecated should return a deprecated error and validation errors when the value is defined and invalid 1`] = `
+Array [
+  Object {
+    "path": "parameter[param]",
+    "rule": "parameter-deprecated",
+    "value": "string",
+  },
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "parameter[param].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Deprecated should return a deprecated error when the value is defined 1`] = `
+Array [
+  Object {
+    "path": "parameter[param]",
+    "rule": "parameter-deprecated",
+    "value": 1,
+  },
+]
+`;
+
+exports[`Deprecated should return a deprecated error when the value is null 1`] = `
+Array [
+  Object {
+    "path": "parameter[param]",
+    "rule": "parameter-deprecated",
+    "value": null,
+  },
+]
+`;
+
+exports[`Deprecated should return no errors when the value is missing 1`] = `Array []`;
+
+exports[`Optional should return no errors when the value is defined 1`] = `Array []`;
+
+exports[`Optional should return no errors when the value is missing 1`] = `Array []`;
+
+exports[`Required should return a required error when the value is missing 1`] = `
+Array [
+  Object {
+    "path": "parameter[param]",
+    "rule": "parameter-required",
+  },
+]
+`;
+
+exports[`Required should return no errors when the value is defined 1`] = `Array []`;
+
+exports[`Schema should return a validation error when the value is invalid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "parameter[param].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Schema should return a validation error when the value is null 1`] = `
+Array [
+  Object {
+    "path": "parameter[param]",
+    "rule": "parameter-deny-empty-value",
+  },
+]
+`;
+
+exports[`Schema should return no errors when the value is valid 1`] = `Array []`;

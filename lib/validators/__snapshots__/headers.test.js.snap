@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty should return a required error 1`] = `
+Array [
+  Object {
+    "path": "headers.header[x-foo-bar]",
+    "rule": "parameter-required",
+  },
+]
+`;
+
+exports[`Insensitive should return no errors when the header case match 1`] = `Array []`;
+
+exports[`Insensitive should return no errors when the header case missmatch 1`] = `Array []`;

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Type should return no errors when the value is valid 1`] = `Array []`;
+
+exports[`Type should return validation error when the value is invalid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Type should return validation error when the value is missing 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "schema",
+    "rule": "schema-invalid",
+    "value": undefined,
+  },
+]
+`;

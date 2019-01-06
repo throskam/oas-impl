@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty media type should return no errors 1`] = `Array []`;
+
+exports[`Media type should return a validation error when the value is invalid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "content[application/json].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Media type should return an unknown media type error when the media type is undefined 1`] = `
+Array [
+  Object {
+    "path": "content",
+    "rule": "content-media-type-required",
+    "value": undefined,
+  },
+]
+`;
+
+exports[`Media type should return an unsupported media type error when the media type is not supported 1`] = `
+Array [
+  Object {
+    "path": "content",
+    "rule": "content-media-type-unsupported",
+    "value": "foo/bar",
+  },
+]
+`;
+
+exports[`Media type should return no errors when the the value and media type are valid 1`] = `Array []`;

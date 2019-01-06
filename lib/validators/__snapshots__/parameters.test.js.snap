@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cookie should return no errors when the value is defined 1`] = `Array []`;
+
+exports[`Cookie should return required error when the value is missing 1`] = `
+Array [
+  Object {
+    "path": "parameters.parameter[name]",
+    "rule": "parameter-required",
+  },
+]
+`;
+
+exports[`Header should return no errors when the header case missmatch 1`] = `Array []`;
+
+exports[`Header should return no errors when the value is defined 1`] = `Array []`;
+
+exports[`Header should return required error when the value is missing 1`] = `
+Array [
+  Object {
+    "path": "parameters.parameter[x-foo-bar]",
+    "rule": "parameter-required",
+  },
+]
+`;
+
+exports[`Path should return no errors when the value is defined 1`] = `Array []`;
+
+exports[`Path should return required error when the value is missing 1`] = `
+Array [
+  Object {
+    "path": "parameters.parameter[param]",
+    "rule": "parameter-required",
+  },
+]
+`;
+
+exports[`Query should return no errors when the value is defined 1`] = `Array []`;
+
+exports[`Query should return required error when the value is missing 1`] = `
+Array [
+  Object {
+    "path": "parameters.parameter[param]",
+    "rule": "parameter-required",
+  },
+]
+`;

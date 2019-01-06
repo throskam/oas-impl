@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Content should return a validation error when the value is invalid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "requestBody.content[application/json].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+]
+`;
+
+exports[`Empty content should no rerros 1`] = `Array []`;
+
+exports[`Optional should return no errors when the value is defined 1`] = `Array []`;
+
+exports[`Optional should return no errors when the value is missing 1`] = `Array []`;
+
+exports[`Required should return a required error when the value is missing 1`] = `
+Array [
+  Object {
+    "path": "requestBody",
+    "rule": "requestBody-required",
+  },
+]
+`;
+
+exports[`Required should return no errors when the value is defined 1`] = `Array []`;

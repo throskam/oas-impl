@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Empty should return no errors 1`] = `Array []`;
+
+exports[`Headers & Content should return no errors when the headers and content are valid 1`] = `Array []`;
+
+exports[`Headers & Content should return validation errors when the headers and content are invalid 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be integer",
+      "params": Object {
+        "type": "integer",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "response.headers.header[x-foo-bar].schema",
+    "rule": "schema-invalid",
+    "value": "string",
+  },
+  Object {
+    "path": "response.content",
+    "rule": "content-media-type-required",
+    "value": undefined,
+  },
+]
+`;
