@@ -17,6 +17,22 @@ An [OpenAPI v3](https://github.com/OAI/OpenAPI-Specification/blob/master/version
 
 `npm install @throskam/oas-impl`
 
+## Usage
+
+```
+import oas from 'oas-impl'
+
+/** Create a request dispatcher for the given openapi v3 specifcation. */
+const dispatch = oas(document, option)
+
+/**
+ * Dispatch the request and get the corresponding route object containing
+ * contextual information and dedicated utility methods.
+ * See documentation for more details.
+ */
+const route = dispatch(method, path)
+```
+
 ## Documentation
 
 See [DOC.md](DOC.md)
@@ -38,3 +54,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - [feature] validator: parameter query allowReserved
 - [feature] validator: discrimator
 - [feature] validator: deprecated
+- [feature] generator: random
+- [feature] validator: customize Ajv
