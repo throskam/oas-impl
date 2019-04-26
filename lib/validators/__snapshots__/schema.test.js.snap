@@ -40,9 +40,7 @@ Array [
 
 exports[`Custom format should return no errors when the value is even 1`] = `Array []`;
 
-exports[`Type should return no errors when the value is valid 1`] = `Array []`;
-
-exports[`Type should return validation error when the value is invalid 1`] = `
+exports[`Type should return a validation error when the value is invalid 1`] = `
 Array [
   Object {
     "ajv": Object {
@@ -61,7 +59,7 @@ Array [
 ]
 `;
 
-exports[`Type should return validation error when the value is missing 1`] = `
+exports[`Type should return a validation error when the value is missing 1`] = `
 Array [
   Object {
     "ajv": Object {
@@ -79,3 +77,5 @@ Array [
   },
 ]
 `;
+
+exports[`Type should return no errors when the value is valid 1`] = `Array []`;
