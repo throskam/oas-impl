@@ -33,6 +33,18 @@
  * @property {Object} ajv - The Ajv error if available
  */
 /**
+ * Option.
+ * @typedef {Object} Option
+ * @property {Object<string, Option.FormatOption>} format - The format option map keyed by format name
+ */
+/**
+ * Format option.
+ * @typedef {Object} FormatOption
+ * @memberof Option
+ * @property {Function} generator - The generator function
+ * @property {Function} validator - The validator function, see https://github.com/epoberezkin/ajv#api-addformat
+ */
+/**
  * Coerce a request
  * @typedef requestCoercer
  * @memberof Impl
@@ -117,8 +129,7 @@ const dispatcher = require('./lib/dispatcher')
  * Create a dispatch function.
  * @alias module:oas-impl
  * @param {Object} definition - The OpenAPI v3 definition
- * @param {Object} option - The option map
- * @param {Object.<string, fn(schema, option)>} option.generator - The generator map keyed by schema format
+ * @param {Option} option - The option map
  * @returns {module:oas-impl~dispatch} The dispatcher
  */
 const oas = function (document, option) {

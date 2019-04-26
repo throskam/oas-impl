@@ -55,4 +55,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - [feature] validator: discrimator
 - [feature] validator: deprecated
 - [feature] generator: random
-- [feature] validator: customize Ajv

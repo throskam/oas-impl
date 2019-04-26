@@ -20,6 +20,9 @@
 <dt><a href="#ResponseValidationError">ResponseValidationError</a> : <code>Object</code></dt>
 <dd><p>Response Validation Error.</p>
 </dd>
+<dt><a href="#Option">Option</a> : <code>Object</code></dt>
+<dd><p>Option.</p>
+</dd>
 <dt><a href="#Route">Route</a> : <code>Object</code></dt>
 <dd><p>Route.</p>
 </dd>
@@ -46,8 +49,7 @@ Create a dispatch function.
 | Param | Type | Description |
 | --- | --- | --- |
 | definition | <code>Object</code> | The OpenAPI v3 definition |
-| option | <code>Object</code> | The option map |
-| option.generator | <code>Object.&lt;string, fn(schema, option)&gt;</code> | The generator map keyed by schema format |
+| option | [<code>Option</code>](#Option) | The option map |
 
 <a name="module_oas-impl--oas..dispatch"></a>
 
@@ -123,6 +125,31 @@ Response Validation Error.
 | rule | <code>string</code> | The violated rule |
 | value | <code>\*</code> | The invalid value |
 | ajv | <code>Object</code> | The Ajv error if available |
+
+<a name="Option"></a>
+
+## Option : <code>Object</code>
+Option.
+
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| format | <code>Object.&lt;string, Option.FormatOption&gt;</code> | The format option map keyed by format name |
+
+<a name="Option.FormatOption"></a>
+
+### Option.FormatOption : <code>Object</code>
+Format option.
+
+**Kind**: static typedef of [<code>Option</code>](#Option)  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| generator | <code>function</code> | The generator function |
+| validator | <code>function</code> | The validator function, see https://github.com/epoberezkin/ajv#api-addformat |
 
 <a name="Route"></a>
 

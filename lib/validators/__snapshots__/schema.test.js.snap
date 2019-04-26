@@ -1,5 +1,45 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Custom format should return a validation error when the value is missing 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "type",
+      "message": "should be number",
+      "params": Object {
+        "type": "number",
+      },
+      "schemaPath": "#/type",
+    },
+    "path": "schema",
+    "rule": "schema-invalid",
+    "value": undefined,
+  },
+]
+`;
+
+exports[`Custom format should return a validation error when the value is odd 1`] = `
+Array [
+  Object {
+    "ajv": Object {
+      "dataPath": "",
+      "keyword": "format",
+      "message": "should match format \\"even\\"",
+      "params": Object {
+        "format": "even",
+      },
+      "schemaPath": "#/format",
+    },
+    "path": "schema",
+    "rule": "schema-invalid",
+    "value": 1,
+  },
+]
+`;
+
+exports[`Custom format should return no errors when the value is even 1`] = `Array []`;
+
 exports[`Type should return no errors when the value is valid 1`] = `Array []`;
 
 exports[`Type should return validation error when the value is invalid 1`] = `
