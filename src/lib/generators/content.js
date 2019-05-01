@@ -18,6 +18,6 @@ module.exports = (content, option) => {
       return
     }
 
-    return generators[mediaTypes]()
+    return generator()
   }
 }
