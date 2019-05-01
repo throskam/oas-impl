@@ -33,6 +33,11 @@ describe('Exact', () => {
     const expected = { content: 1234 }
     expect(generator(payload)).toStrictEqual(expected)
   })
+
+  it('should return undefined when the status does not match and there is no default', () => {
+    const payload = { mediaType: 'application/json', status: 201 }
+    expect(generator(payload)).toBeUndefined()
+  })
 })
 
 describe('Default', () => {
@@ -55,6 +60,12 @@ describe('Default', () => {
     const payload = { mediaType: 'application/json', status: 200 }
     const expected = { content: 1234 }
     expect(generator(payload)).toEqual(expected)
+  })
+
+  it('should return the default status example when the status is undefined', () => {
+    const payload = { mediaType: 'application/json' }
+    const expected = { content: 1234 }
+    expect(generator(payload)).toStrictEqual(expected)
   })
 })
 
@@ -79,27 +90,9 @@ describe('Wildcard', () => {
     const expected = { content: 1234 }
     expect(generator(payload)).toEqual(expected)
   })
-})
 
-describe('First', () => {
-  const responses = {
-    200: {
-      content: {
-        'application/json': {
-          schema: {
-            type: 'integer',
-            example: 1234
-          }
-        }
-      }
-    }
-  }
-
-  const generator = createResponsesGenerator(responses)
-
-  it('should return the first status example when the status is missing and there is no default', () => {
-    const payload = { mediaType: 'application/json' }
-    const expected = { content: 1234 }
-    expect(generator(payload)).toEqual(expected)
+  it('should return undefined when the status does not match and there is no default', () => {
+    const payload = { mediaType: 'application/json', status: 300 }
+    expect(generator(payload)).toBeUndefined()
   })
 })
