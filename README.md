@@ -55,3 +55,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 - [feature] validator: discrimator
 - [feature] validator: deprecated
 - [feature] generator: random
+- [feature] coercer: async
+- [feature] generator: async
+- [feature] validator: async
