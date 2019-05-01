@@ -97,7 +97,7 @@ describe('First', () => {
 
   const generator = createResponsesGenerator(responses)
 
-  it('should return the first status example when the status missing defined and there is no default status', () => {
+  it('should return the first status example when the status is missing and there is no default', () => {
     const payload = { mediaType: 'application/json' }
     const expected = { content: 1234 }
     expect(generator(payload)).toEqual(expected)
