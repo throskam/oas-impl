@@ -3,7 +3,7 @@
 const deepClone = require('./deepClone')
 
 it('should deep clone', () => {
-  const payload = { a: { b: [{ a: { b: 1 } }] } }
+  const payload = { a: { b: [{ a: { b: 1, c: null } }] } }
   const clone = deepClone(payload)
   expect(clone).not.toBe(payload)
   expect(clone.a).not.toBe(payload.a)

@@ -1,10 +1,10 @@
 const deepClone = (o) => {
-  if (Array.isArray(o)) {
-    return o.map(deepClone)
+  if (typeof o !== 'object' || o === null) {
+    return o
   }
 
-  if (typeof o !== 'object') {
-    return o
+  if (Array.isArray(o)) {
+    return o.map(deepClone)
   }
 
   return Object.keys(o).reduce((acc, key) => {
