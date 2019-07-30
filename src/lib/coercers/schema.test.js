@@ -277,7 +277,7 @@ describe('Object', () => {
     it('should return the orginal value when a non object is given', () => {
       const payload = { value: 'string' }
       const expected = 'string'
-      expect(coercer(payload)).toBe(expected)
+      expect(coercer(payload)).toEqual(expected)
     })
   })
 })
