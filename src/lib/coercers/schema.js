@@ -20,6 +20,10 @@ const casters = {
 
 const coerce = (schema) => {
   return ({ value } = {}) => {
+    if (schema.nullable && value === null) {
+      return value
+    }
+
     if (schema.type === 'array') {
       if (!Array.isArray(value)) {
         // Cannot coerce a non-array value into an array.

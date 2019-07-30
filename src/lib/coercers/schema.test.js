@@ -403,3 +403,38 @@ describe('Undefined', () => {
     })
   })
 })
+
+describe('Nullable', () => {
+  describe('Pod', () => {
+    const schema = {
+      type: 'string',
+      nullable: true
+    }
+
+    const coercer = createSchemaCoercer(schema)
+
+    it('should return null when the value is null', () => {
+      const payload = { value: null }
+      expect(coercer(payload)).toBeNull()
+    })
+  })
+
+  describe('Object', () => {
+    const schema = {
+      type: 'object',
+      nullable: true,
+      properties: {
+        prop: {
+          type: 'integer'
+        }
+      }
+    }
+
+    const coercer = createSchemaCoercer(schema)
+
+    it('should return null when the value is null', () => {
+      const payload = { value: null }
+      expect(coercer(payload)).toBeNull()
+    })
+  })
+})
