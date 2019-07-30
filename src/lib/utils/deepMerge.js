@@ -3,6 +3,10 @@ const merge = (base, extend) => {
     return extend
   }
 
+  if (base === null) {
+    return extend
+  }
+
   if (typeof base !== typeof extend) {
     return extend
   }

@@ -8,6 +8,12 @@ it('should return extend if base is undefined', () => {
   expect(deepMerge(base, extend)).toBe(extend)
 })
 
+it('should return extend if base is null', () => {
+  const base = null
+  const extend = { prop: 1 }
+  expect(deepMerge(base, extend)).toBe(extend)
+})
+
 it('should keep extend if base is missing the key', () => {
   const base = { a: 1 }
   const extend = { b: 1 }
