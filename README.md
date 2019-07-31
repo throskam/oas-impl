@@ -1,5 +1,10 @@
 # OpenAPI Specification Implementation
 
+![CircleCI](https://img.shields.io/circleci/build/github/throskam/oas-impl)
+![Codecov](https://img.shields.io/codecov/c/github/throskam/oas-impl)
+![npm-version](https://img.shields.io/npm/v/@throskam/oas-impl)
+![npm-license](https://img.shields.io/npm/l/@throskam/oas-impl)
+
 An [OpenAPI v3](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md) specification implementation.
 
 ## Features
