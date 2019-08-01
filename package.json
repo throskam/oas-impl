@@ -32,7 +32,7 @@
   "dependencies": {
     "ajv": "^6.10.0",
     "openapi-schema-to-json-schema": "^2.2.0",
-    "swagger-parser": "^6.0.5"
+    "swagger-parser": "^8.0.0"
   },
   "devDependencies": {
     "eslint": "^6.1.0",
