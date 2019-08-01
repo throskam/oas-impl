@@ -139,7 +139,7 @@ describe('Object', () => {
     const schema = {
       type: 'object',
       properties: {
-        'prop': {
+        prop: {
           type: 'integer'
         }
       }
