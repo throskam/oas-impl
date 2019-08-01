@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createSchemaValidator = require('./schema')
 
 describe('Type', () => {

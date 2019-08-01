@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createHeadersCoercer = require('./headers')
 
 describe('Empty', () => {

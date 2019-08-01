@@ -1,5 +1,3 @@
-/* globals it, expect */
-
 const deepMerge = require('./deepMerge')
 
 it('should return extend if base is undefined', () => {

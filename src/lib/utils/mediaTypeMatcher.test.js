@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const mediaTypeMatcher = require('./mediaTypeMatcher')
 
 describe('Match', () => {

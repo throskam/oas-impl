@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createRequestValidator = require('./requestValidator')
 
 describe('Empty', () => {

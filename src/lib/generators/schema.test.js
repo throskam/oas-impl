@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createSchemaGenerator = require('./schema')
 
 describe('Empty', () => {

@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createParameterCoercer = require('./parameter')
 
 describe('Empty', () => {

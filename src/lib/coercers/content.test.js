@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createContentCoercer = require('./content')
 
 describe('Empty', () => {

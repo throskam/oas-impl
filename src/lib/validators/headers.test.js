@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createHeadersValidator = require('./headers')
 
 describe('Empty', () => {

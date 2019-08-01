@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createResponseGenerator = require('./response')
 
 describe('Empty', () => {

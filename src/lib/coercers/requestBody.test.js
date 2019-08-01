@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createRequestBodyCoercer = require('./requestBody')
 
 describe('Empty', () => {

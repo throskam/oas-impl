@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createSchemaCoercer = require('./schema')
 
 describe('Boolean', () => {

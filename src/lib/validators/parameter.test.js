@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const parameterValidator = require('./parameter')
 
 describe('Required', () => {

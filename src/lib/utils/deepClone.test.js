@@ -1,5 +1,3 @@
-/* globals it, expect */
-
 const deepClone = require('./deepClone')
 
 it('should deep clone', () => {

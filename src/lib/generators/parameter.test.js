@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createParameterGenerator = require('./parameter')
 
 describe('Empty', () => {

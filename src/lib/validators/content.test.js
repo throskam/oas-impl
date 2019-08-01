@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createContentValidator = require('./content')
 
 describe('Empty media type', () => {

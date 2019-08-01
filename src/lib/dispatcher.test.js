@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createDispatcher = require('./dispatcher')
 
 const meta = {

@@ -1,5 +1,3 @@
-/* globals it, expect */
-
 const normalizeObjectKeys = require('./normalizeObjectKeys')
 
 it('should return an object with senstive keys', () => {

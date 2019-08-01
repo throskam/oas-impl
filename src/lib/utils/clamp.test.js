@@ -1,5 +1,3 @@
-/* globals it, expect */
-
 const clamp = require('./clamp')
 
 it('should clamp', () => {

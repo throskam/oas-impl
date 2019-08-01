@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createContentGenerator = require('./content')
 
 describe('Empty', () => {

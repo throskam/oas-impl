@@ -1,5 +1,3 @@
-/* globals describe, it, expect */
-
 const createRequestBodyValidator = require('./requestBody')
 
 describe('Empty content', () => {
