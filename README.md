@@ -38,6 +38,16 @@ const dispatch = oas(document, option)
 const route = dispatch(method, path)
 ```
 
+### Style and explode
+
+Due to ambiguities in the specification, it is impossible to distinguish a single form exploded object parameter from multiple form not exploded primitive parameters.
+Therefore, the caller is left responsible for mapping query and cookie parameters into an object.
+For coherence sake, path parameters are also expected to be mapped correctly.
+
+### Content
+
+The content should be parsed and decoded correctly.
+
 ## Documentation
 
 See [DOC.md](DOC.md)
@@ -48,18 +58,24 @@ See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Roadmap
 
-- [feature] validator: security (apiKey, http, oauth2 and openIdConnect)
-- [feature] coercer: parameter style
-- [feature] coercer: parameter explode
+- [debug] add debug message to help dev
+- [feature] generator: pattern
+- [feature] generator: xml
+- [feature] generator: uniqueItems
+- [feature] geneartor: nullable
+- [feature] validator: nullable
+- [feature] generator: proper exclusive min and max
+- [feature] generator: use examples
 - [feature] coercer: content mediaType (JSON.parse, form, text, ...)
 - [feature] coercer: content encoding
-- [feature] coercer: response links
-- [feature] validator: response links
-- [feature] generator: response links
 - [feature] validator: parameter query allowReserved
 - [feature] validator: discrimator
 - [feature] validator: deprecated
-- [feature] generator: random
+- [feature] validator: security (apiKey, http, oauth2 and openIdConnect)
+- [feature] coercer: response links
+- [feature] validator: response links
+- [feature] generator: response links
 - [feature] coercer: async
 - [feature] generator: async
 - [feature] validator: async
+- [feature] generator: random

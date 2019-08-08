@@ -1,8 +1,3 @@
-// TODO: string pattern ??
-// TODO: object xml
-// TODO: array uniqueItems
-// TODO: nullable everywhere
-// TODO: number exclusive min and max
 const deepMerge = require('../utils/deepMerge')
 const clamp = require('../utils/clamp')
 

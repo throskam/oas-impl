@@ -59,3 +59,24 @@ describe('Content', () => {
     expect(coercer()).toBeUndefined()
   })
 })
+
+describe('Style', () => {
+  const parameter = {
+    in: 'path',
+    schema: {
+      type: 'array',
+      items: {
+        type: 'integer'
+      }
+    },
+    style: 'simple'
+  }
+
+  const coercer = createParameterCoercer(parameter)
+
+  it('should return the parsed and coerced value', () => {
+    const payload = { value: '1,2,3' }
+    const expected = [1, 2, 3]
+    expect(coercer(payload)).toStrictEqual(expected)
+  })
+})

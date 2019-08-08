@@ -1,5 +1,6 @@
 const createContentCoercer = require('./content')
 const createSchemaCoercer = require('./schema')
+const createParameterParser = require('./../utils/parameterParser')
 
 const createFirstContentCoercer = (content) => {
   const mediaType = Object.keys(content)[0]
@@ -13,5 +14,15 @@ module.exports = (parameter) => {
     : parameter.schema ? createSchemaCoercer(parameter.schema)
       : null
 
-  return ({ value } = {}) => coercer ? coercer({ value }) : value
+  const parser = createParameterParser(parameter)
+
+  return ({ value } = {}) => {
+    if (value === undefined) {
+      return value
+    }
+
+    const parsed = parser(value)
+
+    return coercer ? coercer({ value: parsed }) : parsed
+  }
 }
