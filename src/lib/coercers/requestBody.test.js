@@ -35,7 +35,7 @@ describe('Content', () => {
     expect(coercer(payload)).toEqual(expected)
   })
 
-  it('should return undefined if the value is missing', () => {
+  it('should return undefined when the value is missing', () => {
     expect(coercer()).toBeUndefined()
   })
 })
