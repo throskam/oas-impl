@@ -9,7 +9,6 @@ module.exports = (response) => {
     const headers = headersCoercer ? headersCoercer({ header }) : header
     const body = contentCoercer ? contentCoercer({ value: content, mediaType }) : content
 
-    //  TODO: rewrite
     if (headers === undefined && body === undefined) {
       return undefined
     }

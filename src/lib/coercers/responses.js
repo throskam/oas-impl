@@ -10,10 +10,17 @@ module.exports = (responses) => {
     const wildcard = status ? status.toString().slice(0, 1) + 'XX' : undefined
     const coercer = responseCoercers[status] || responseCoercers[wildcard] || responseCoercers['default']
 
-    // TODO: rewrite
-    return coercer ? coercer({ header, content, mediaType }) : (header === undefined && content === undefined ? undefined : {
-      ...(header && { header }),
-      ...(content && { content })
-    })
+    if (!coercer) {
+      if (header === undefined && content === undefined) {
+        return undefined
+      }
+
+      return {
+        ...(header && { header }),
+        ...(content && { content })
+      }
+    }
+
+    return coercer({ header, content, mediaType })
   }
 }
