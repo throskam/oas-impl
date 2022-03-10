@@ -1,12 +1,7 @@
-const toJsonSchema = require('openapi-schema-to-json-schema')
-const Ajv = require('ajv')
+const Ajv = require('ajv/dist/2019')
 
 module.exports = (schema, option = {}) => {
-  const ajv = new Ajv({
-    schemaId: 'auto'
-  })
-
-  ajv.addMetaSchema(require('ajv/lib/refs/json-schema-draft-04.json'))
+  const ajv = new Ajv()
 
   if (option.format) {
     Object.keys(option.format).forEach(name => {
@@ -14,7 +9,7 @@ module.exports = (schema, option = {}) => {
     })
   }
 
-  const validator = ajv.compile(toJsonSchema(schema))
+  const validator = ajv.compile(schema)
 
   return ({ value } = {}) => (validator(value) ? [] : validator.errors).map(error => ({
     rule: 'schema-invalid',

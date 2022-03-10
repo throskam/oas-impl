@@ -6,9 +6,9 @@ exports[`Content should return a validation error when the value is invalid 1`] 
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },
@@ -32,9 +32,9 @@ Array [
   },
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },
@@ -88,9 +88,9 @@ exports[`Schema should return a validation error when the value is invalid 1`] =
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },

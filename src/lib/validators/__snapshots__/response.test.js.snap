@@ -8,9 +8,9 @@ exports[`Headers & Content should return validation errors when the headers and 
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },

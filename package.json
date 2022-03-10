@@ -30,7 +30,7 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "ajv": "^6.10.0",
+    "ajv": "^8.11.0",
     "openapi-schema-to-json-schema": "^2.2.0",
     "swagger-parser": "^10.0.3"
   },
