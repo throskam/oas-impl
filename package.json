@@ -44,7 +44,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^27.5.1",
     "jsdoc-to-markdown": "^7.1.1",
-    "standard-version": "^7.0.0"
+    "standard-version": "^9.3.2"
   },
   "publishConfig": {
     "access": "public"
