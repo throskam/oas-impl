@@ -4,9 +4,9 @@ exports[`Default should return a validation error when the value is invalid 1`] 
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },
@@ -27,9 +27,9 @@ exports[`Exact should return a validation error when the value is invalid 1`] = 
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },
@@ -48,9 +48,9 @@ exports[`Wildcard should return a validation error when the value is valid 1`] =
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },

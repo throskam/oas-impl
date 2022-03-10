@@ -4,9 +4,9 @@ exports[`Custom format should return a validation error when the value is missin
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be number",
+      "message": "must be number",
       "params": Object {
         "type": "number",
       },
@@ -23,9 +23,9 @@ exports[`Custom format should return a validation error when the value is odd 1`
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "format",
-      "message": "should match format \\"even\\"",
+      "message": "must match format \\"even\\"",
       "params": Object {
         "format": "even",
       },
@@ -44,9 +44,9 @@ exports[`Type should return a validation error when the value is invalid 1`] = `
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },
@@ -63,9 +63,9 @@ exports[`Type should return a validation error when the value is missing 1`] = `
 Array [
   Object {
     "ajv": Object {
-      "dataPath": "",
+      "instancePath": "",
       "keyword": "type",
-      "message": "should be integer",
+      "message": "must be integer",
       "params": Object {
         "type": "integer",
       },
