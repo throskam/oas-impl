@@ -39,12 +39,16 @@ const generate = (schema, option) => {
   }
 
   if (schema.type === 'integer') {
-    const minimum = schema.minimum === undefined ? Number.MIN_SAFE_INTEGER
-      : schema.exclusiveMinimum ? schema.minimum + 1
+    const minimum = schema.minimum === undefined
+      ? Number.MIN_SAFE_INTEGER
+      : schema.exclusiveMinimum
+        ? schema.minimum + 1
         : schema.minimum
 
-    const maximum = schema.minimum === undefined ? Number.MAX_SAFE_INTEGER
-      : schema.exclusiveMaximum ? schema.maximum + 1
+    const maximum = schema.minimum === undefined
+      ? Number.MAX_SAFE_INTEGER
+      : schema.exclusiveMaximum
+        ? schema.maximum + 1
         : schema.maximum
 
     if (schema.multipleOf) {

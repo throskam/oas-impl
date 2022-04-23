@@ -11,7 +11,7 @@ module.exports = (responses, option) => {
 
     const generator = responseGenerators[status] ||
       responseGenerators[wildcard] ||
-      responseGenerators['default']
+      responseGenerators.default
 
     return generator ? generator({ mediaType }) : undefined
   }

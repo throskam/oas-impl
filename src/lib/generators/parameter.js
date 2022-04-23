@@ -9,8 +9,10 @@ const createFirstContentGenerator = (content, option) => {
 }
 
 module.exports = (parameter, option) => {
-  const generator = parameter.content ? createFirstContentGenerator(parameter.content, option)
-    : parameter.schema ? createSchemaGenerator(parameter.schema, option)
+  const generator = parameter.content
+    ? createFirstContentGenerator(parameter.content, option)
+    : parameter.schema
+      ? createSchemaGenerator(parameter.schema, option)
       : null
 
   return () => generator ? generator() : undefined

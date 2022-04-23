@@ -11,8 +11,10 @@ const createFirstContentValidator = (content, option) => {
 }
 
 module.exports = (parameter, option) => {
-  const validator = parameter.content ? createFirstContentValidator(parameter.content, option)
-    : parameter.schema ? createSchemaValidator(parameter.schema, option)
+  const validator = parameter.content
+    ? createFirstContentValidator(parameter.content, option)
+    : parameter.schema
+      ? createSchemaValidator(parameter.schema, option)
       : null
 
   const error = (rule, value) => ({

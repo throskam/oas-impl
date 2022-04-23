@@ -10,8 +10,10 @@ const createFirstContentCoercer = (content) => {
 }
 
 module.exports = (parameter) => {
-  const coercer = parameter.content ? createFirstContentCoercer(parameter.content)
-    : parameter.schema ? createSchemaCoercer(parameter.schema)
+  const coercer = parameter.content
+    ? createFirstContentCoercer(parameter.content)
+    : parameter.schema
+      ? createSchemaCoercer(parameter.schema)
       : null
 
   const parser = createParameterParser(parameter)
