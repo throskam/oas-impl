@@ -9,12 +9,14 @@ module.exports = (operation) => {
     const body = requestBodyCoercer ? requestBodyCoercer({ content, mediaType }) : content
 
     const coerced = {
-      ...(parametersCoercer ? parametersCoercer({ path, query, header, cookie }) : {
-        ...(path && { path }),
-        ...(query && { query }),
-        ...(header && { header }),
-        ...(cookie && { cookie })
-      }),
+      ...(parametersCoercer
+        ? parametersCoercer({ path, query, header, cookie })
+        : {
+            ...(path && { path }),
+            ...(query && { query }),
+            ...(header && { header }),
+            ...(cookie && { cookie })
+          }),
       ...(body !== undefined && { content: body })
     }
 

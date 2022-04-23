@@ -49,7 +49,7 @@ describe('Content', () => {
 
   const coercer = createParameterCoercer(parameter)
 
-  it('should return the application/json default ', () => {
+  it('should return the application/json default', () => {
     const payload = { value: '1', mediaType: 'application/json' }
     const expected = 1
     expect(coercer(payload)).toEqual(expected)

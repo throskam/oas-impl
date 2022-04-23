@@ -8,7 +8,7 @@ module.exports = (responses) => {
 
   return ({ header, content, mediaType, status } = {}) => {
     const wildcard = status ? status.toString().slice(0, 1) + 'XX' : undefined
-    const coercer = responseCoercers[status] || responseCoercers[wildcard] || responseCoercers['default']
+    const coercer = responseCoercers[status] || responseCoercers[wildcard] || responseCoercers.default
 
     if (!coercer) {
       if (header === undefined && content === undefined) {
