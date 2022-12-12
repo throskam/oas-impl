@@ -19,7 +19,7 @@ const objectify = (value, delimiter) => {
   }, {})
 }
 
-module.exports = (parameter) => {
+export default (parameter) => {
   const style = parameter.style || defaultStyles[parameter.in]
   const explode = parameter.explode === undefined ? style === 'form' : parameter.explode
   const type = parameter.content ? parameter.content[Object.keys(parameter.content)[0]].type : parameter.schema ? parameter.schema.type : null

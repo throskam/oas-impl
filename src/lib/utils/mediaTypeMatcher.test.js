@@ -1,4 +1,4 @@
-const mediaTypeMatcher = require('./mediaTypeMatcher')
+import mediaTypeMatcher from './mediaTypeMatcher'
 
 describe('Match', () => {
   const mediaTypes = [

@@ -1,4 +1,4 @@
-const createRequestCoercer = require('./requestCoercer')
+import createRequestCoercer from './requestCoercer'
 
 describe('Empty', () => {
   const operation = {}

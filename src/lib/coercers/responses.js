@@ -1,6 +1,6 @@
-const createResponseCoercer = require('./response')
+import createResponseCoercer from './response'
 
-module.exports = (responses) => {
+export default (responses) => {
   const responseCoercers = Object.keys(responses).reduce((coercers, status) => {
     coercers[status] = createResponseCoercer(responses[status])
     return coercers

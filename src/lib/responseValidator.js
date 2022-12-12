@@ -1,6 +1,6 @@
-const createResponsesValidator = require('./validators/responses')
+import createResponsesValidator from './validators/responses'
 
-module.exports = (operation, option) => {
+export default (operation, option) => {
   const responsesValidator = operation.responses ? createResponsesValidator(operation.responses, option) : null
 
   return payload => responsesValidator ? responsesValidator(payload) : []

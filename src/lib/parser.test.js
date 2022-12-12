@@ -1,4 +1,4 @@
-const createParser = require('./parser')
+import createParser from './parser'
 
 describe('Dereference', () => {
   const definition = {

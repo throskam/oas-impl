@@ -1,5 +1,5 @@
-const createContentGenerator = require('./content')
-const createSchemaGenerator = require('./schema')
+import createContentGenerator from './content'
+import createSchemaGenerator from './schema'
 
 const createFirstContentGenerator = (content, option) => {
   const mediaType = Object.keys(content)[0]
@@ -8,7 +8,7 @@ const createFirstContentGenerator = (content, option) => {
   return () => generator({ mediaType })
 }
 
-module.exports = (parameter, option) => {
+export default (parameter, option) => {
   const generator = parameter.content
     ? createFirstContentGenerator(parameter.content, option)
     : parameter.schema

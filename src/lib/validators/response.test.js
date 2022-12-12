@@ -1,4 +1,4 @@
-const createResponseValidator = require('./response')
+import createResponseValidator from './response'
 
 describe('Empty', () => {
   const response = {}

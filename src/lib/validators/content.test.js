@@ -1,4 +1,4 @@
-const createContentValidator = require('./content')
+import createContentValidator from './content'
 
 describe('Empty media type', () => {
   const content = {

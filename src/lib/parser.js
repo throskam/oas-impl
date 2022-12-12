@@ -1,6 +1,6 @@
-const swagger = require('swagger-parser')
+import swagger from 'swagger-parser'
 
-module.exports = () => {
+export default () => {
   return async (document) => {
     // Remove external refs.
     const bundle = await swagger.bundle(document)

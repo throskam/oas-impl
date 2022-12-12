@@ -1,6 +1,6 @@
-const createResponseGenerator = require('./response')
+import createResponseGenerator from './response'
 
-module.exports = (responses, option) => {
+export default (responses, option) => {
   const responseGenerators = Object.keys(responses).reduce((generators, status) => {
     generators[status] = createResponseGenerator(responses[status], option)
     return generators

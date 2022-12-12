@@ -1,4 +1,4 @@
-const createHeadersValidator = require('./headers')
+import createHeadersValidator from './headers'
 
 describe('Empty', () => {
   const headers = {

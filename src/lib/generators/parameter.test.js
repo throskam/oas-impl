@@ -1,4 +1,4 @@
-const createParameterGenerator = require('./parameter')
+import createParameterGenerator from './parameter'
 
 describe('Empty', () => {
   const parameter = {}

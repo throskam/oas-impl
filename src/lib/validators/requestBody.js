@@ -1,11 +1,11 @@
-const createContentValidator = require('./content')
+import createContentValidator from './content'
 
 const error = (rule) => ({
   rule,
   path: 'requestBody'
 })
 
-module.exports = (requestBody, option) => {
+export default (requestBody, option) => {
   const validator = requestBody.content ? createContentValidator(requestBody.content, option) : null
 
   return ({ value, mediaType } = {}) => {

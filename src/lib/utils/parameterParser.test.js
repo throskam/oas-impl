@@ -1,4 +1,4 @@
-const createParameterParser = require('./parameterParser')
+import createParameterParser from './parameterParser'
 
 const schema = {
   object: {

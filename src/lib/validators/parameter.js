@@ -1,5 +1,5 @@
-const createSchemaValidator = require('./schema')
-const createContentValidator = require('./content')
+import createSchemaValidator from './schema'
+import createContentValidator from './content'
 
 const createFirstContentValidator = (content, option) => {
   const mediaType = Object.keys(content)[0]
@@ -10,7 +10,7 @@ const createFirstContentValidator = (content, option) => {
   }
 }
 
-module.exports = (parameter, option) => {
+export default (parameter, option) => {
   const validator = parameter.content
     ? createFirstContentValidator(parameter.content, option)
     : parameter.schema

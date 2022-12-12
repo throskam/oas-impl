@@ -1,6 +1,6 @@
-const createResponsesGenerator = require('./generators/responses')
+import createResponsesGenerator from './generators/responses'
 
-module.exports = (operation, option) => {
+export default (operation, option) => {
   const responsesGenerator = operation.responses ? createResponsesGenerator(operation.responses, option) : null
 
   return payload => responsesGenerator ? responsesGenerator(payload) : undefined

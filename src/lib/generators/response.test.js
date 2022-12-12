@@ -1,4 +1,4 @@
-const createResponseGenerator = require('./response')
+import createResponseGenerator from './response'
 
 describe('Empty', () => {
   const response = {}

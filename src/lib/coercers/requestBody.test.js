@@ -1,4 +1,4 @@
-const createRequestBodyCoercer = require('./requestBody')
+import createRequestBodyCoercer from './requestBody'
 
 describe('Empty', () => {
   const requestBody = {}

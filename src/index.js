@@ -120,8 +120,8 @@
  * @module oas-impl
  * @typicalname oas
  */
-const parser = require('./lib/parser')
-const dispatcher = require('./lib/dispatcher')
+import parser from './lib/parser'
+import dispatcher from './lib/dispatcher'
 
 /**
  * Dispatcher.
@@ -158,4 +158,4 @@ const oas = function (document, option) {
   return async (method, path) => resolve(method, path)
 }
 
-module.exports = oas
+export default oas

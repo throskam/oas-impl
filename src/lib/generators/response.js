@@ -1,7 +1,7 @@
-const createHeadersGenerator = require('./headers')
-const createContentGenerator = require('./content')
+import createHeadersGenerator from './headers'
+import createContentGenerator from './content'
 
-module.exports = (response, option) => {
+export default (response, option) => {
   const headersGenerator = response.headers ? createHeadersGenerator(response.headers, option) : null
   const contentGenerator = response.content ? createContentGenerator(response.content, option) : null
 

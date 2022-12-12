@@ -1,4 +1,4 @@
-const createContentGenerator = require('./content')
+import createContentGenerator from './content'
 
 describe('Empty', () => {
   const content = {}

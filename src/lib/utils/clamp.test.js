@@ -1,4 +1,4 @@
-const clamp = require('./clamp')
+import clamp from './clamp'
 
 it('should clamp', () => {
   expect(clamp(0, 0, 0)).toEqual(0)

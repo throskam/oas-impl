@@ -1,12 +1,12 @@
-const requestCoercer = require('./requestCoercer')
-const requestValidator = require('./requestValidator')
-const responseCoercer = require('./responseCoercer')
-const responseGenerator = require('./responseGenerator')
-const responseValidator = require('./responseValidator')
+import requestCoercer from './requestCoercer'
+import requestValidator from './requestValidator'
+import responseCoercer from './responseCoercer'
+import responseGenerator from './responseGenerator'
+import responseValidator from './responseValidator'
 
 const diff = (a, b) => a.filter(x => !b.some(y => y.in === x.in && y.name === x.name))
 
-module.exports = (definition, option = {}) => {
+export default (definition, option = {}) => {
   const methods = ['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace']
   const paths = definition.paths || {}
 

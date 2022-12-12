@@ -1,4 +1,4 @@
-const createHeadersCoercer = require('./headers')
+import createHeadersCoercer from './headers'
 
 describe('Empty', () => {
   const headers = {}

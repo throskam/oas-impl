@@ -1,4 +1,4 @@
-const createSchemaGenerator = require('./schema')
+import createSchemaGenerator from './schema'
 
 describe('Empty', () => {
   const schema = {}

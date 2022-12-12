@@ -1,4 +1,4 @@
-const createDispatcher = require('./dispatcher')
+import createDispatcher from './dispatcher'
 
 const meta = {
   openapi: '3.0.0',

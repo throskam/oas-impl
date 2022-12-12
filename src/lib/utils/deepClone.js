@@ -13,4 +13,4 @@ const deepClone = (o) => {
   }, {})
 }
 
-module.exports = deepClone
+export default deepClone

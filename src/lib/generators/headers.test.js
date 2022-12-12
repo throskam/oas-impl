@@ -1,4 +1,4 @@
-const createHeadersGenerator = require('./headers')
+import createHeadersGenerator from './headers'
 
 describe('Empty', () => {
   const headers = {}

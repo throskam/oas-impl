@@ -1,4 +1,4 @@
-module.exports = (value, min, max) => {
+export default (value, min, max) => {
   if (value < min) {
     return min
   }

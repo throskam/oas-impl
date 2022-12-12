@@ -1,4 +1,4 @@
-const deepMerge = require('./deepMerge')
+import deepMerge from './deepMerge'
 
 it('should return extend when base is undefined', () => {
   const base = undefined

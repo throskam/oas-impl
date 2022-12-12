@@ -1,7 +1,7 @@
-const createHeadersCoercer = require('./headers')
-const createContentCoercer = require('./content')
+import createHeadersCoercer from './headers'
+import createContentCoercer from './content'
 
-module.exports = (response) => {
+export default (response) => {
   const headersCoercer = response.headers ? createHeadersCoercer(response.headers) : null
   const contentCoercer = response.content ? createContentCoercer(response.content) : null
 

@@ -1,5 +1,6 @@
 {
   "name": "@throskam/oas-impl",
+  "type": "module",
   "version": "0.3.0",
   "description": "OpenAPI Specification Implementation for Node.js",
   "repository": "throskam/oas-impl",
@@ -20,13 +21,13 @@
     "generator",
     "mock"
   ],
-  "main": "src/index.js",
+  "exports": "./src/index.js",
   "scripts": {
     "doc": "jsdoc2md src/index.js > DOC.md",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
     "release": "standard-version"
   },
   "dependencies": {

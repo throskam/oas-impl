@@ -1,4 +1,4 @@
-const deepClone = require('./deepClone')
+import deepClone from './deepClone'
 
 it('should deep clone', () => {
   const payload = { a: { b: [{ a: { b: 1, c: null } }] } }

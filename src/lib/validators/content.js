@@ -1,7 +1,7 @@
-const mediaTypeMatcher = require('../utils/mediaTypeMatcher')
-const createSchemaValidator = require('./schema')
+import mediaTypeMatcher from '../utils/mediaTypeMatcher'
+import createSchemaValidator from './schema'
 
-module.exports = (content, option) => {
+export default (content, option) => {
   const mediaTypes = Object.keys(content)
 
   const validators = mediaTypes

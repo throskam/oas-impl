@@ -1,4 +1,4 @@
-const createSchemaValidator = require('./schema')
+import createSchemaValidator from './schema'
 
 describe('Type', () => {
   const schema = {

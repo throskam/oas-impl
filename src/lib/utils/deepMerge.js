@@ -25,4 +25,4 @@ const merge = (base, extend) => {
   return extend
 }
 
-module.exports = merge
+export default merge

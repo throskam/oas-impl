@@ -1,6 +1,6 @@
-const createContentCoercer = require('./content')
+import createContentCoercer from './content'
 
-module.exports = (requestBody) => {
+export default (requestBody) => {
   const coercer = requestBody.content ? createContentCoercer(requestBody.content) : null
 
   return ({ content, mediaType } = {}) => coercer ? coercer({ value: content, mediaType }) : content

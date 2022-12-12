@@ -1,4 +1,4 @@
-const createRequestBodyValidator = require('./requestBody')
+import createRequestBodyValidator from './requestBody'
 
 describe('Empty content', () => {
   const requestBody = {

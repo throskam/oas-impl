@@ -1,4 +1,4 @@
-const createSchemaCoercer = require('./schema')
+import createSchemaCoercer from './schema'
 
 describe('Boolean', () => {
   const schema = {

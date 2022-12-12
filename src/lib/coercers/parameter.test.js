@@ -1,4 +1,4 @@
-const createParameterCoercer = require('./parameter')
+import createParameterCoercer from './parameter'
 
 describe('Empty', () => {
   const parameter = {}

@@ -1,6 +1,6 @@
-const createResponsesCoercer = require('./coercers/responses')
+import createResponsesCoercer from './coercers/responses'
 
-module.exports = (operation) => {
+export default (operation) => {
   const responsesCoercer = operation.responses ? createResponsesCoercer(operation.responses) : null
 
   return ({ header, content, mediaType, status } = {}) =>

@@ -1,4 +1,4 @@
-const createRequestValidator = require('./requestValidator')
+import createRequestValidator from './requestValidator'
 
 describe('Empty', () => {
   const operation = {}

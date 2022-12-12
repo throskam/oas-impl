@@ -1,7 +1,7 @@
-const mediaTypeMatcher = require('../utils/mediaTypeMatcher')
-const createSchemaCoercer = require('./schema')
+import mediaTypeMatcher from '../utils/mediaTypeMatcher'
+import createSchemaCoercer from './schema'
 
-module.exports = (content) => {
+export default (content) => {
   const mediaTypes = Object.keys(content)
 
   const coercers = mediaTypes

@@ -1,6 +1,6 @@
-const createParameterGenerator = require('./parameter')
+import createParameterGenerator from './parameter'
 
-module.exports = (headers, option) => {
+export default (headers, option) => {
   const generators = Object.keys(headers).map(name => {
     const generator = createParameterGenerator({ ...headers[name], name }, option)
 

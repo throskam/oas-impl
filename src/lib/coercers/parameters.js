@@ -1,9 +1,9 @@
-const normalizeObjectKeys = require('../utils/normalizeObjectKeys')
-const deepClone = require('../utils/deepClone')
-const deepMerge = require('../utils/deepMerge')
-const createParameterCoercer = require('./parameter')
+import normalizeObjectKeys from '../utils/normalizeObjectKeys'
+import deepClone from '../utils/deepClone'
+import deepMerge from '../utils/deepMerge'
+import createParameterCoercer from './parameter'
 
-module.exports = (parameters) => {
+export default (parameters) => {
   const coercers = parameters.map(parameter => {
     const coercer = createParameterCoercer(parameter)
     const name = parameter.name

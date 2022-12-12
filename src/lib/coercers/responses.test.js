@@ -1,4 +1,4 @@
-const createResponsesCoercer = require('./responses')
+import createResponsesCoercer from './responses'
 
 describe('Empty', () => {
   const response = {}

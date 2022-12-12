@@ -1,7 +1,7 @@
-const createParametersCoercer = require('./coercers/parameters')
-const createRequestBodyCoercer = require('./coercers/requestBody')
+import createParametersCoercer from './coercers/parameters'
+import createRequestBodyCoercer from './coercers/requestBody'
 
-module.exports = (operation) => {
+export default (operation) => {
   const parametersCoercer = operation.parameters ? createParametersCoercer(operation.parameters) : null
   const requestBodyCoercer = operation.requestBody ? createRequestBodyCoercer(operation.requestBody) : null
 

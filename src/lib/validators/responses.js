@@ -1,6 +1,6 @@
-const createResponseValidator = require('./response')
+import createResponseValidator from './response'
 
-module.exports = (responses, option) => {
+export default (responses, option) => {
   const responseValidators = Object.keys(responses).reduce((validators, status) => {
     validators[status] = createResponseValidator(responses[status], option)
     return validators

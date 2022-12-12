@@ -1,5 +1,5 @@
-const deepMerge = require('../utils/deepMerge')
-const clamp = require('../utils/clamp')
+import deepMerge from '../utils/deepMerge'
+import clamp from '../utils/clamp'
 
 const generate = (schema, option) => {
   if (option.format && option.format[schema.format] && option.format[schema.format].generator) {
@@ -141,6 +141,6 @@ const generate = (schema, option) => {
   return undefined
 }
 
-module.exports = (schema, option = {}) => {
+export default (schema, option = {}) => {
   return () => generate(schema, option)
 }

@@ -1,4 +1,4 @@
-const createContentCoercer = require('./content')
+import createContentCoercer from './content'
 
 describe('Empty', () => {
   const content = {}

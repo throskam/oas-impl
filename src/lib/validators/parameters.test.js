@@ -1,4 +1,4 @@
-const createParametersValidator = require('./parameters')
+import createParametersValidator from './parameters'
 
 describe('Path', () => {
   const parameters = [{

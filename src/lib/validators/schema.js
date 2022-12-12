@@ -1,6 +1,6 @@
-const Ajv = require('ajv/dist/2019')
+import Ajv from 'ajv/dist/2019'
 
-module.exports = (schema, option = {}) => {
+export default (schema, option = {}) => {
   const ajv = new Ajv()
 
   if (option.format) {

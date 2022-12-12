@@ -1,7 +1,7 @@
-const normalizeObjectKeys = require('../utils/normalizeObjectKeys')
-const createParameterValidator = require('./parameter')
+import normalizeObjectKeys from '../utils/normalizeObjectKeys'
+import createParameterValidator from './parameter'
 
-module.exports = (parameters, option) => {
+export default (parameters, option) => {
   const validators = parameters.map(parameter => {
     const validator = createParameterValidator(parameter, option)
     const name = parameter.name

@@ -1,5 +1,5 @@
-const deepClone = require('../utils/deepClone')
-const deepMerge = require('../utils/deepMerge')
+import deepClone from '../utils/deepClone'
+import deepMerge from '../utils/deepMerge'
 
 const castNumber = (val) => {
   const casted = Number(val)
@@ -76,4 +76,4 @@ const coerce = (schema) => {
   }
 }
 
-module.exports = coerce
+export default coerce

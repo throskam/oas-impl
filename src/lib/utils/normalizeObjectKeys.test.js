@@ -1,4 +1,4 @@
-const normalizeObjectKeys = require('./normalizeObjectKeys')
+import normalizeObjectKeys from './normalizeObjectKeys'
 
 it('should return an object with senstive keys', () => {
   const object = { PRoPErtY: 1 }

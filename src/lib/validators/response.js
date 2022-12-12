@@ -1,7 +1,7 @@
-const createHeadersValidator = require('./headers')
-const createContentValidator = require('./content')
+import createHeadersValidator from './headers'
+import createContentValidator from './content'
 
-module.exports = (response, option) => {
+export default (response, option) => {
   const headersValidator = response.headers ? createHeadersValidator(response.headers, option) : null
   const contentValidator = response.content ? createContentValidator(response.content, option) : null
 

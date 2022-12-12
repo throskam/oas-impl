@@ -1,7 +1,7 @@
-const createParametersValidator = require('./validators/parameters')
-const createRequestBodyValidator = require('./validators/requestBody')
+import createParametersValidator from './validators/parameters'
+import createRequestBodyValidator from './validators/requestBody'
 
-module.exports = (operation, option) => {
+export default (operation, option) => {
   const parametersValidator = operation.parameters ? createParametersValidator(operation.parameters, option) : null
   const requestBodyValidator = operation.requestBody ? createRequestBodyValidator(operation.requestBody, option) : null
 
