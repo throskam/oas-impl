@@ -1,23 +1,26 @@
 import normalizeObjectKeys from '../utils/normalizeObjectKeys'
-import createParameterValidator from './parameter'
+import ParameterValidator from './parameter'
 
-export default (parameters, option) => {
-  const validators = parameters.map(parameter => {
-    const validator = createParameterValidator(parameter, option)
-    const name = parameter.name
+export default class ParametersValidator {
+  constructor (parameters, option) {
+    this.parameters = parameters
+    this.validators = parameters.map(parameter => {
+      const validator = new ParameterValidator(parameter, option)
+      const name = parameter.name
 
-    return payload => validator({ value: payload[parameter.in][name] })
-  })
+      return payload => validator.validate({ value: payload[parameter.in][name] })
+    })
+  }
 
-  return ({ path = {}, query = {}, header = {}, cookie = {} } = {}) => {
+  validate ({ path = {}, query = {}, header = {}, cookie = {} } = {}) {
     const payload = {
       path,
       query,
-      header: normalizeObjectKeys(header, parameters.filter(parameter => parameter.in === 'header').map(parameter => parameter.name)),
+      header: normalizeObjectKeys(header, this.parameters.filter(parameter => parameter.in === 'header').map(parameter => parameter.name)),
       cookie
     }
 
-    return validators.map(validator => validator(payload)).flat().map(error => ({
+    return this.validators.map(validator => validator(payload)).flat().map(error => ({
       ...error,
       path: 'parameters.' + error.path
     }))

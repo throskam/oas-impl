@@ -1,14 +1,16 @@
-import createHeadersValidator from './headers'
-import createContentValidator from './content'
+import HeadersValidator from './headers'
+import ContentValidator from './content'
 
-export default (response, option) => {
-  const headersValidator = response.headers ? createHeadersValidator(response.headers, option) : null
-  const contentValidator = response.content ? createContentValidator(response.content, option) : null
+export default class ResponseValidator {
+  constructor (response, option) {
+    this.headersValidator = response.headers ? new HeadersValidator(response.headers, option) : null
+    this.contentValidator = response.content ? new ContentValidator(response.content, option) : null
+  }
 
-  return ({ header, content, mediaType } = {}) => {
+  validate ({ header, content, mediaType } = {}) {
     return [
-      ...(headersValidator ? headersValidator({ header }) : []),
-      ...(contentValidator ? contentValidator({ value: content, mediaType }) : [])
+      ...(this.headersValidator ? this.headersValidator.validate({ header }) : []),
+      ...(this.contentValidator ? this.contentValidator.validate({ value: content, mediaType }) : [])
     ].map(error => ({
       ...error,
       path: 'response.' + error.path

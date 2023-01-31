@@ -1,12 +1,12 @@
-import createResponsesGenerator from './responses'
+import ResponsesGenerator from './responses'
 
 describe('Empty', () => {
   const responses = {}
 
-  const generator = createResponsesGenerator(responses)
+  const generator = new ResponsesGenerator(responses)
 
   it('should return undefined when no responses are defined', () => {
-    expect(generator()).toBeUndefined()
+    expect(generator.generate()).toBeUndefined()
   })
 })
 
@@ -24,17 +24,17 @@ describe('Exact', () => {
     }
   }
 
-  const generator = createResponsesGenerator(responses)
+  const generator = new ResponsesGenerator(responses)
 
   it('should return the 200 status example when the status is 200', () => {
     const payload = { mediaType: 'application/json', status: 200 }
     const expected = { content: 1234 }
-    expect(generator(payload)).toStrictEqual(expected)
+    expect(generator.generate(payload)).toStrictEqual(expected)
   })
 
   it('should return undefined when the status does not match and there is no default', () => {
     const payload = { mediaType: 'application/json', status: 201 }
-    expect(generator(payload)).toBeUndefined()
+    expect(generator.generate(payload)).toBeUndefined()
   })
 })
 
@@ -52,18 +52,18 @@ describe('Default', () => {
     }
   }
 
-  const generator = createResponsesGenerator(responses)
+  const generator = new ResponsesGenerator(responses)
 
   it('should return the default status example when the status is missing', () => {
     const payload = { mediaType: 'application/json', status: 200 }
     const expected = { content: 1234 }
-    expect(generator(payload)).toEqual(expected)
+    expect(generator.generate(payload)).toEqual(expected)
   })
 
   it('should return the default status example when the status is undefined', () => {
     const payload = { mediaType: 'application/json' }
     const expected = { content: 1234 }
-    expect(generator(payload)).toStrictEqual(expected)
+    expect(generator.generate(payload)).toStrictEqual(expected)
   })
 })
 
@@ -81,16 +81,16 @@ describe('Wildcard', () => {
     }
   }
 
-  const generator = createResponsesGenerator(responses)
+  const generator = new ResponsesGenerator(responses)
 
   it('should return the 2XX example when the status match the pattern', () => {
     const payload = { mediaType: 'application/json', status: 210 }
     const expected = { content: 1234 }
-    expect(generator(payload)).toEqual(expected)
+    expect(generator.generate(payload)).toEqual(expected)
   })
 
   it('should return undefined when the status does not match and there is no default', () => {
     const payload = { mediaType: 'application/json', status: 300 }
-    expect(generator(payload)).toBeUndefined()
+    expect(generator.generate(payload)).toBeUndefined()
   })
 })

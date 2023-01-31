@@ -1,36 +1,38 @@
 import mediaTypeMatcher from '../utils/mediaTypeMatcher'
-import createSchemaValidator from './schema'
+import SchemaValidator from './schema'
 
-export default (content, option) => {
-  const mediaTypes = Object.keys(content)
+export default class ContentValidator {
+  constructor (content, option) {
+    this.mediaTypes = Object.keys(content)
 
-  const validators = mediaTypes
-    .filter(mediaType => content[mediaType].schema)
-    .reduce((validators, mediaType) => {
-      validators[mediaType] = createSchemaValidator(content[mediaType].schema, option)
-      return validators
-    }, {})
+    this.validators = this.mediaTypes
+      .filter(mediaType => content[mediaType].schema)
+      .reduce((validators, mediaType) => {
+        validators[mediaType] = new SchemaValidator(content[mediaType].schema, option)
+        return validators
+      }, {})
 
-  const error = (rule, value) => ({
-    rule,
-    path: 'content',
-    value
-  })
+    this.error = (rule, value) => ({
+      rule,
+      path: 'content',
+      value
+    })
+  }
 
-  return ({ value, mediaType } = {}) => {
+  validate ({ value, mediaType } = {}) {
     const errors = []
 
     if (!mediaType) {
-      errors.push(error('content-media-type-required', mediaType))
+      errors.push(this.error('content-media-type-required', mediaType))
       return errors
     }
 
-    if (!mediaTypeMatcher(mediaTypes, mediaType)) {
-      errors.push(error('content-media-type-unsupported', mediaType))
+    if (!mediaTypeMatcher(this.mediaTypes, mediaType)) {
+      errors.push(this.error('content-media-type-unsupported', mediaType))
       return errors
     }
 
-    const validator = validators[mediaTypeMatcher(mediaTypes, mediaType)]
+    const validator = this.validators[mediaTypeMatcher(this.mediaTypes, mediaType)]
 
     if (!validator) {
       return errors
@@ -38,7 +40,7 @@ export default (content, option) => {
 
     return [
       ...errors,
-      ...validator({ value }).map(error => ({
+      ...validator.validate({ value }).map(error => ({
         ...error,
         path: 'content[' + mediaType + '].' + error.path
       }))

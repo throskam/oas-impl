@@ -1,7 +1,11 @@
-import createContentCoercer from './content'
+import ContentCoercer from './content'
 
-export default (requestBody) => {
-  const coercer = requestBody.content ? createContentCoercer(requestBody.content) : null
+export default class RequestBodyCoercer {
+  constructor (requestBody) {
+    this.coercer = requestBody.content ? new ContentCoercer(requestBody.content) : null
+  }
 
-  return ({ content, mediaType } = {}) => coercer ? coercer({ value: content, mediaType }) : content
+  coerce ({ content, mediaType } = {}) {
+    return this.coercer ? this.coercer.coerce({ value: content, mediaType }) : content
+  }
 }

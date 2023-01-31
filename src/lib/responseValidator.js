@@ -1,7 +1,11 @@
-import createResponsesValidator from './validators/responses'
+import ResponsesValidator from './validators/responses'
 
-export default (operation, option) => {
-  const responsesValidator = operation.responses ? createResponsesValidator(operation.responses, option) : null
+export default class ResponseValidator {
+  constructor (operation, option) {
+    this.responsesValidator = operation.responses ? new ResponsesValidator(operation.responses, option) : null
+  }
 
-  return payload => responsesValidator ? responsesValidator(payload) : []
+  validate (payload) {
+    return this.responsesValidator ? this.responsesValidator.validate(payload) : []
+  }
 }

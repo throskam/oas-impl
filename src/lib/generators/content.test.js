@@ -1,12 +1,12 @@
-import createContentGenerator from './content'
+import ContentGenerator from './content'
 
 describe('Empty', () => {
   const content = {}
 
-  const generator = createContentGenerator(content)
+  const generator = new ContentGenerator(content)
 
   it('should return undefined when no schema is defined', () => {
-    expect(generator()).toBeUndefined()
+    expect(generator.generate()).toBeUndefined()
   })
 })
 
@@ -20,20 +20,20 @@ describe('Media type', () => {
     }
   }
 
-  const generator = createContentGenerator(content)
+  const generator = new ContentGenerator(content)
 
   it('should return the application/json example when the media type is application/json', () => {
     const payload = { mediaType: 'application/json' }
     const expected = 1234
-    expect(generator(payload)).toEqual(expected)
+    expect(generator.generate(payload)).toEqual(expected)
   })
 
   it('should return undefined when the media type is foo/bar', () => {
     const payload = { mediaType: 'foo/bar' }
-    expect(generator(payload)).toBeUndefined()
+    expect(generator.generate(payload)).toBeUndefined()
   })
 
   it('should return undefined when the media type is missing', () => {
-    expect(generator()).toBeUndefined()
+    expect(generator.generate()).toBeUndefined()
   })
 })

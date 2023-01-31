@@ -1,17 +1,19 @@
-import createResponseValidator from './response'
+import ResponseValidator from './response'
 
-export default (responses, option) => {
-  const responseValidators = Object.keys(responses).reduce((validators, status) => {
-    validators[status] = createResponseValidator(responses[status], option)
-    return validators
-  }, {})
+export default class ResponsesValidator {
+  constructor (responses, option) {
+    this.responseValidators = Object.keys(responses).reduce((validators, status) => {
+      validators[status] = new ResponseValidator(responses[status], option)
+      return validators
+    }, {})
+  }
 
-  return ({ header, content, mediaType, status } = {}) => {
+  validate ({ header, content, mediaType, status } = {}) {
     const wildcard = status ? status.toString().slice(0, 1) + 'XX' : undefined
-    const validator = responseValidators[status] || responseValidators[wildcard] || responseValidators.default
+    const validator = this.responseValidators[status] || this.responseValidators[wildcard] || this.responseValidators.default
 
     return validator
-      ? validator({ header, content, mediaType }).map(error => ({
+      ? validator.validate({ header, content, mediaType }).map(error => ({
         ...error,
         path: 'responses[' + status + '].' + error.path
       }))

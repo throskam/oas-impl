@@ -1,7 +1,11 @@
-import createResponsesGenerator from './generators/responses'
+import ResponsesGenerator from './generators/responses'
 
-export default (operation, option) => {
-  const responsesGenerator = operation.responses ? createResponsesGenerator(operation.responses, option) : null
+export default class ResponseGenerator {
+  constructor (operation, option) {
+    this.responsesGenerator = operation.responses ? new ResponsesGenerator(operation.responses, option) : null
+  }
 
-  return payload => responsesGenerator ? responsesGenerator(payload) : undefined
+  generate (payload) {
+    return this.responsesGenerator ? this.responsesGenerator.generate(payload) : undefined
+  }
 }

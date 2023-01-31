@@ -1,18 +1,18 @@
-import createRequestBodyCoercer from './requestBody'
+import RequestBodyCoercer from './requestBody'
 
 describe('Empty', () => {
   const requestBody = {}
 
-  const coercer = createRequestBodyCoercer(requestBody)
+  const coercer = new RequestBodyCoercer(requestBody)
 
   it('should return the original value when no content is defined', () => {
     const payload = { content: 1 }
     const expected = 1
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return undefined when the value is missing', () => {
-    expect(coercer()).toBeUndefined()
+    expect(coercer.coerce()).toBeUndefined()
   })
 })
 
@@ -27,15 +27,15 @@ describe('Content', () => {
     }
   }
 
-  const coercer = createRequestBodyCoercer(requestBody)
+  const coercer = new RequestBodyCoercer(requestBody)
 
   it('should return the coerced value', () => {
     const payload = { content: '1', mediaType: 'application/json' }
     const expected = 1
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return undefined when the value is missing', () => {
-    expect(coercer()).toBeUndefined()
+    expect(coercer.coerce()).toBeUndefined()
   })
 })

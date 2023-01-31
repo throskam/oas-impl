@@ -1,14 +1,16 @@
-import createResponseCoercer from './response'
+import ResponseCoercer from './response'
 
-export default (responses) => {
-  const responseCoercers = Object.keys(responses).reduce((coercers, status) => {
-    coercers[status] = createResponseCoercer(responses[status])
-    return coercers
-  }, {})
+export default class ResponsesCoercer {
+  constructor (responses) {
+    this.responseCoercers = Object.keys(responses).reduce((coercers, status) => {
+      coercers[status] = new ResponseCoercer(responses[status])
+      return coercers
+    }, {})
+  }
 
-  return ({ header, content, mediaType, status } = {}) => {
+  coerce ({ header, content, mediaType, status } = {}) {
     const wildcard = status ? status.toString().slice(0, 1) + 'XX' : undefined
-    const coercer = responseCoercers[status] || responseCoercers[wildcard] || responseCoercers.default
+    const coercer = this.responseCoercers[status] || this.responseCoercers[wildcard] || this.responseCoercers.default
 
     if (!coercer) {
       if (header === undefined && content === undefined) {
@@ -21,6 +23,6 @@ export default (responses) => {
       }
     }
 
-    return coercer({ header, content, mediaType })
+    return coercer.coerce({ header, content, mediaType })
   }
 }

@@ -1,14 +1,16 @@
-import createParametersValidator from './validators/parameters'
-import createRequestBodyValidator from './validators/requestBody'
+import ParametersValidator from './validators/parameters'
+import RequestBodyValidator from './validators/requestBody'
 
-export default (operation, option) => {
-  const parametersValidator = operation.parameters ? createParametersValidator(operation.parameters, option) : null
-  const requestBodyValidator = operation.requestBody ? createRequestBodyValidator(operation.requestBody, option) : null
+export default class RequestValidator {
+  constructor (operation, option) {
+    this.parametersValidator = operation.parameters ? new ParametersValidator(operation.parameters, option) : null
+    this.requestBodyValidator = operation.requestBody ? new RequestBodyValidator(operation.requestBody, option) : null
+  }
 
-  return ({ path, query, header, cookie, content, mediaType } = {}) => {
+  validate ({ path, query, header, cookie, content, mediaType } = {}) {
     return [
-      ...(parametersValidator ? parametersValidator({ path, query, header, cookie }) : []),
-      ...(requestBodyValidator ? requestBodyValidator({ value: content, mediaType }) : [])
+      ...(this.parametersValidator ? this.parametersValidator.validate({ path, query, header, cookie }) : []),
+      ...(this.requestBodyValidator ? this.requestBodyValidator.validate({ value: content, mediaType }) : [])
     ]
   }
 }

@@ -1,12 +1,12 @@
-import createResponsesValidator from './responses'
+import ResponsesValidator from './responses'
 
 describe('Empty', () => {
   const response = {}
 
-  const validator = createResponsesValidator(response)
+  const validator = new ResponsesValidator(response)
 
   it('should return no errors', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 })
 
@@ -23,16 +23,16 @@ describe('Exact', () => {
     }
   }
 
-  const validator = createResponsesValidator(responses)
+  const validator = new ResponsesValidator(responses)
 
   it('should return no errors when the value is valid', () => {
     const payload = { content: 1, mediaType: 'application/json', status: 200 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a validation error when the value is invalid', () => {
     const payload = { content: 'string', mediaType: 'application/json', status: 200 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })
 
@@ -49,16 +49,16 @@ describe('Default', () => {
     }
   }
 
-  const validator = createResponsesValidator(responses)
+  const validator = new ResponsesValidator(responses)
 
   it('should return no errors when the value is valid', () => {
     const payload = { content: 1, mediaType: 'application/json', status: 200 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a validation error when the value is invalid', () => {
     const payload = { content: 'string', mediaType: 'application/json', status: 200 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })
 
@@ -75,15 +75,15 @@ describe('Wildcard', () => {
     }
   }
 
-  const validator = createResponsesValidator(responses)
+  const validator = new ResponsesValidator(responses)
 
   it('should return no errors when the value is defined', () => {
     const payload = { content: 1, mediaType: 'application/json', status: 200 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a validation error when the value is valid', () => {
     const payload = { content: 'string', mediaType: 'application/json', status: 200 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })

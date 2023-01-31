@@ -1,18 +1,18 @@
-import createParameterCoercer from './parameter'
+import ParameterCoercer from './parameter'
 
 describe('Empty', () => {
   const parameter = {}
 
-  const coercer = createParameterCoercer(parameter)
+  const coercer = new ParameterCoercer(parameter)
 
   it('should return the original value when no coercion is needed', () => {
     const payload = { value: 'value' }
     const expected = 'value'
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return undefined when the value is missing', () => {
-    expect(coercer()).toBeUndefined()
+    expect(coercer.coerce()).toBeUndefined()
   })
 })
 
@@ -23,16 +23,16 @@ describe('Schema', () => {
     }
   }
 
-  const coercer = createParameterCoercer(parameter)
+  const coercer = new ParameterCoercer(parameter)
 
   it('should return the coerced value', () => {
     const payload = { value: '1' }
     const expected = 1
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return undefined when the value is missing', () => {
-    expect(coercer()).toBeUndefined()
+    expect(coercer.coerce()).toBeUndefined()
   })
 })
 
@@ -47,16 +47,16 @@ describe('Content', () => {
     }
   }
 
-  const coercer = createParameterCoercer(parameter)
+  const coercer = new ParameterCoercer(parameter)
 
   it('should return the application/json default', () => {
     const payload = { value: '1', mediaType: 'application/json' }
     const expected = 1
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return undefined when the value is missing', () => {
-    expect(coercer()).toBeUndefined()
+    expect(coercer.coerce()).toBeUndefined()
   })
 })
 
@@ -72,11 +72,11 @@ describe('Style', () => {
     style: 'simple'
   }
 
-  const coercer = createParameterCoercer(parameter)
+  const coercer = new ParameterCoercer(parameter)
 
   it('should return the parsed and coerced value', () => {
     const payload = { value: '1,2,3' }
     const expected = [1, 2, 3]
-    expect(coercer(payload)).toStrictEqual(expected)
+    expect(coercer.coerce(payload)).toStrictEqual(expected)
   })
 })

@@ -1,12 +1,12 @@
-import createResponseGenerator from './responseGenerator'
+import ResponseGenerator from './responseGenerator'
 
 describe('Empty', () => {
   const operation = {}
 
-  const generator = createResponseGenerator(operation)
+  const generator = new ResponseGenerator(operation)
 
   it('should return undefined', () => {
-    expect(generator()).toBeUndefined()
+    expect(generator.generate()).toBeUndefined()
   })
 })
 
@@ -26,11 +26,11 @@ describe('Responses', () => {
     }
   }
 
-  const generator = createResponseGenerator(operation)
+  const generator = new ResponseGenerator(operation)
 
   it('should return a valid generated response', () => {
     const payload = { mediaType: 'application/json', status: 200 }
 
-    expect(generator(payload)).toStrictEqual({ content: true })
+    expect(generator.generate(payload)).toStrictEqual({ content: true })
   })
 })

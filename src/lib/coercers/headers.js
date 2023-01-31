@@ -1,19 +1,23 @@
 import deepClone from '../utils/deepClone'
 import deepMerge from '../utils/deepMerge'
 import normalizeObjectKeys from '../utils/normalizeObjectKeys'
-import createParameterCoercer from './parameter'
+import ParameterCoercer from './parameter'
 
-export default (headers) => {
-  const coercers = Object.keys(headers).map(name => {
-    const coercer = createParameterCoercer({ ...headers[name], name })
+export default class HeadersCoercer {
+  constructor (headers) {
+    this.headers = headers
+    this.coercers = Object.keys(this.headers).map(name => {
+      // TODO: create header coercer
+      const coercer = new ParameterCoercer({ ...headers[name], name })
 
-    return header => ({ name, value: coercer({ value: header[name] }) })
-  })
+      return header => ({ name, value: coercer.coerce({ value: header[name] }) })
+    })
+  }
 
-  return ({ header = {} } = {}) => {
-    const normalizedHeader = normalizeObjectKeys(header, Object.keys(headers))
+  coerce ({ header = {} } = {}) {
+    const normalizedHeader = normalizeObjectKeys(header, Object.keys(this.headers))
 
-    const coerced = coercers.reduce((acc, coercer) => {
+    const coerced = this.coercers.reduce((acc, coercer) => {
       const coerced = coercer(normalizedHeader)
 
       if (coerced.value === undefined) {

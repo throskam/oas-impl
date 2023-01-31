@@ -1,4 +1,4 @@
-import createSchemaCoercer from './schema'
+import SchemaCoercer from './schema'
 
 describe('Boolean', () => {
   const schema = {
@@ -6,41 +6,41 @@ describe('Boolean', () => {
     default: true
   }
 
-  const coercer = createSchemaCoercer(schema)
+  const coercer = new SchemaCoercer(schema)
 
   it('should return the value when valid', () => {
     const payload = { value: true }
     const expected = true
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the coerce value', () => {
     const payload = { value: 'anything' }
     const expected = true
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return true when the value is an empty string', () => {
     const payload = { value: '' }
     const expected = true
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return false when the value is "false"', () => {
     const payload = { value: 'false' }
     const expected = false
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return false when the value is "0"', () => {
     const payload = { value: '0' }
     const expected = false
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the default when the value is missing', () => {
     const expected = true
-    expect(coercer()).toEqual(expected)
+    expect(coercer.coerce()).toEqual(expected)
   })
 })
 
@@ -50,23 +50,23 @@ describe('String', () => {
     default: 'default'
   }
 
-  const coercer = createSchemaCoercer(schema)
+  const coercer = new SchemaCoercer(schema)
 
   it('should return the value when valid', () => {
     const payload = { value: 'string' }
     const expected = 'string'
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the coerce value', () => {
     const payload = { value: 42 }
     const expected = '42'
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the default when the value is missing', () => {
     const expected = 'default'
-    expect(coercer()).toEqual(expected)
+    expect(coercer.coerce()).toEqual(expected)
   })
 })
 
@@ -76,29 +76,29 @@ describe('Integer', () => {
     default: 0
   }
 
-  const coercer = createSchemaCoercer(schema)
+  const coercer = new SchemaCoercer(schema)
 
   it('should return the value when valid', () => {
     const payload = { value: 1 }
     const expected = 1
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the coerce value', () => {
     const payload = { value: '1' }
     const expected = 1
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the intial value when the coercion fails', () => {
     const payload = { value: 'string' }
     const expected = 'string'
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the default when the value is missing', () => {
     const expected = 0
-    expect(coercer()).toEqual(expected)
+    expect(coercer.coerce()).toEqual(expected)
   })
 })
 
@@ -108,29 +108,29 @@ describe('Number', () => {
     default: 0.0
   }
 
-  const coercer = createSchemaCoercer(schema)
+  const coercer = new SchemaCoercer(schema)
 
   it('should return the value when valid', () => {
     const payload = { value: 1.0 }
     const expected = 1.0
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the coerce value', () => {
     const payload = { value: '1.0' }
     const expected = 1.0
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the intial value when the coercion fails', () => {
     const payload = { value: 'string' }
     const expected = 'string'
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return the default when the value is missing', () => {
     const expected = 0.0
-    expect(coercer()).toEqual(expected)
+    expect(coercer.coerce()).toEqual(expected)
   })
 })
 
@@ -145,24 +145,24 @@ describe('Object', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return the value when valid', () => {
       const payload = { value: { prop: 1 } }
       const expected = { prop: 1 }
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
 
     it('should return the coerce value', () => {
       const payload = { value: { prop: '1' } }
       const expected = { prop: 1 }
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
 
     it('should return the intial value when the coercion fails', () => {
       const payload = { value: { prop: 'string' } }
       const expected = { prop: 'string' }
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
   })
 
@@ -181,24 +181,24 @@ describe('Object', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return the value when valid', () => {
       const payload = { value: { parent: { child: 1 } } }
       const expected = { parent: { child: 1 } }
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
 
     it('should return the coerce value', () => {
       const payload = { value: { parent: { child: '1' } } }
       const expected = { parent: { child: 1 } }
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
 
     it('should return the intial value when the coercion fails', () => {
       const payload = { value: { parent: { child: 'string' } } }
       const expected = { parent: { child: 'string' } }
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
   })
 
@@ -224,11 +224,11 @@ describe('Object', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return the default only when there is one', () => {
       const expected = { parent: { child: 0 } }
-      expect(coercer()).toStrictEqual(expected)
+      expect(coercer.coerce()).toStrictEqual(expected)
     })
   })
 
@@ -251,12 +251,12 @@ describe('Object', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return additional value with the coerced value', () => {
       const payload = { value: { array: [{ myProp: 1 }, { prop: '1', myProp: 0 }] } }
       const expected = { array: [{ myProp: 1, prop: 0 }, { prop: 1, myProp: 0 }] }
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
   })
 
@@ -270,12 +270,12 @@ describe('Object', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return the orginal value when a non object is given', () => {
       const payload = { value: 'string' }
       const expected = 'string'
-      expect(coercer(payload)).toEqual(expected)
+      expect(coercer.coerce(payload)).toEqual(expected)
     })
   })
 })
@@ -289,24 +289,24 @@ describe('Array', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return the value when valid', () => {
       const payload = { value: [1, 2, 3] }
       const expected = [1, 2, 3]
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
 
     it('should return the coerce value', () => {
       const payload = { value: ['1', '2', '3'] }
       const expected = [1, 2, 3]
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
 
     it('should return the intial value when the coercion fails', () => {
       const payload = { value: ['a', 'b', 'c'] }
       const expected = ['a', 'b', 'c']
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
   })
 
@@ -324,12 +324,12 @@ describe('Array', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return default value when the value is missing', () => {
       const payload = { value: [{}, undefined, { other: 1 }] }
       const expected = [{ prop: 0 }, { prop: 0 }, { prop: 0, other: 1 }]
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
   })
 
@@ -341,12 +341,12 @@ describe('Array', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return additional values with coerced value', () => {
       const payload = { value: ['a', '1'] }
       const expected = ['a', 1]
-      expect(coercer(payload)).toStrictEqual(expected)
+      expect(coercer.coerce(payload)).toStrictEqual(expected)
     })
   })
 })
@@ -357,10 +357,10 @@ describe('Undefined', () => {
       type: 'integer'
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return undefined when the value is missing', () => {
-      expect(coercer()).toBeUndefined()
+      expect(coercer.coerce()).toBeUndefined()
     })
   })
 
@@ -374,10 +374,10 @@ describe('Undefined', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return undefined when the value is missing', () => {
-      expect(coercer()).toBeUndefined()
+      expect(coercer.coerce()).toBeUndefined()
     })
   })
 
@@ -394,10 +394,10 @@ describe('Undefined', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return undefined when the value is missing', () => {
-      expect(coercer()).toBeUndefined()
+      expect(coercer.coerce()).toBeUndefined()
     })
   })
 })
@@ -409,11 +409,11 @@ describe('Nullable', () => {
       nullable: true
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return null when the value is null', () => {
       const payload = { value: null }
-      expect(coercer(payload)).toBeNull()
+      expect(coercer.coerce(payload)).toBeNull()
     })
   })
 
@@ -428,11 +428,11 @@ describe('Nullable', () => {
       }
     }
 
-    const coercer = createSchemaCoercer(schema)
+    const coercer = new SchemaCoercer(schema)
 
     it('should return null when the value is null', () => {
       const payload = { value: null }
-      expect(coercer(payload)).toBeNull()
+      expect(coercer.coerce(payload)).toBeNull()
     })
   })
 })

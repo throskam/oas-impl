@@ -1,13 +1,15 @@
-import createHeadersCoercer from './headers'
-import createContentCoercer from './content'
+import HeadersCoercer from './headers'
+import ContentCoercer from './content'
 
-export default (response) => {
-  const headersCoercer = response.headers ? createHeadersCoercer(response.headers) : null
-  const contentCoercer = response.content ? createContentCoercer(response.content) : null
+export default class ResponseCoercer {
+  constructor (response) {
+    this.headersCoercer = response.headers ? new HeadersCoercer(response.headers) : null
+    this.contentCoercer = response.content ? new ContentCoercer(response.content) : null
+  }
 
-  return ({ header, content, mediaType } = {}) => {
-    const headers = headersCoercer ? headersCoercer({ header }) : header
-    const body = contentCoercer ? contentCoercer({ value: content, mediaType }) : content
+  coerce ({ header, content, mediaType } = {}) {
+    const headers = this.headersCoercer ? this.headersCoercer.coerce({ header }) : header
+    const body = this.contentCoercer ? this.contentCoercer.coerce({ value: content, mediaType }) : content
 
     if (headers === undefined && body === undefined) {
       return undefined

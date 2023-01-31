@@ -1,16 +1,18 @@
-import createParametersCoercer from './coercers/parameters'
-import createRequestBodyCoercer from './coercers/requestBody'
+import ParametersCoercer from './coercers/parameters'
+import RequestBodyCoercer from './coercers/requestBody'
 
-export default (operation) => {
-  const parametersCoercer = operation.parameters ? createParametersCoercer(operation.parameters) : null
-  const requestBodyCoercer = operation.requestBody ? createRequestBodyCoercer(operation.requestBody) : null
+export default class RequestCoercer {
+  constructor (operation) {
+    this.parametersCoercer = operation.parameters ? new ParametersCoercer(operation.parameters) : null
+    this.requestBodyCoercer = operation.requestBody ? new RequestBodyCoercer(operation.requestBody) : null
+  }
 
-  return ({ path, query, header, cookie, content, mediaType } = {}) => {
-    const body = requestBodyCoercer ? requestBodyCoercer({ content, mediaType }) : content
+  coerce ({ path, query, header, cookie, content, mediaType } = {}) {
+    const body = this.requestBodyCoercer ? this.requestBodyCoercer.coerce({ content, mediaType }) : content
 
     const coerced = {
-      ...(parametersCoercer
-        ? parametersCoercer({ path, query, header, cookie })
+      ...(this.parametersCoercer
+        ? this.parametersCoercer.coerce({ path, query, header, cookie })
         : {
             ...(path && { path }),
             ...(query && { query }),

@@ -1,14 +1,16 @@
-import createParameterGenerator from './parameter'
+import ParameterGenerator from './parameter'
 
-export default (headers, option) => {
-  const generators = Object.keys(headers).map(name => {
-    const generator = createParameterGenerator({ ...headers[name], name }, option)
+export default class HeadersGenerator {
+  constructor (headers, option) {
+    this.generators = Object.keys(headers).map(name => {
+      const generator = new ParameterGenerator({ ...headers[name], name }, option)
 
-    return header => ({ name, value: generator() })
-  })
+      return header => ({ name, value: generator.generate() })
+    })
+  }
 
-  return () => {
-    const generated = generators.reduce((acc, generator) => {
+  generate () {
+    const generated = this.generators.reduce((acc, generator) => {
       const generated = generator()
 
       acc[generated.name] = generated.value

@@ -18,30 +18,34 @@ const casters = {
   boolean: (val) => ['false', '0'].includes(val) ? false : [''].includes(val) ? true : Boolean(val)
 }
 
-const coerce = (schema) => {
-  return ({ value } = {}) => {
-    if (schema.nullable && value === null) {
+export default class SchemaCoercer {
+  constructor (schema) {
+    this.schema = schema
+  }
+
+  coerce ({ value } = {}) {
+    if (this.schema.nullable && value === null) {
       return value
     }
 
-    if (schema.type === 'array') {
+    if (this.schema.type === 'array') {
       if (!Array.isArray(value)) {
         // Cannot coerce a non-array value into an array.
         return value
       }
 
-      return value.map(item => coerce(schema.items)({ value: item }))
+      return value.map(item => new SchemaCoercer(this.schema.items).coerce({ value: item }))
     }
 
-    if (schema.type === 'object') {
+    if (this.schema.type === 'object') {
       if (typeof value !== 'object' && value !== undefined) {
         // Cannot coerce a non-object value into an object.
         // Ignore undefined since it could lead to default values.
         return value
       }
 
-      const coerced = Object.keys(schema.properties).reduce((acc, property) => {
-        const coerced = coerce(schema.properties[property])({ value: value ? value[property] : undefined })
+      const coerced = Object.keys(this.schema.properties).reduce((acc, property) => {
+        const coerced = new SchemaCoercer(this.schema.properties[property]).coerce({ value: value ? value[property] : undefined })
 
         if (coerced !== undefined) {
           acc[property] = coerced
@@ -60,20 +64,18 @@ const coerce = (schema) => {
     }
 
     if (value === undefined) {
-      return schema.default
+      return this.schema.default
     }
 
     /* eslint-disable-next-line valid-typeof */
-    if (typeof value === schema.type) {
+    if (typeof value === this.schema.type) {
       return value
     }
 
     try {
-      return casters[schema.type](value)
+      return casters[this.schema.type](value)
     } catch (e) {
       return value
     }
   }
 }
-
-export default coerce

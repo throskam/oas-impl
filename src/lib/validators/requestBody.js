@@ -1,31 +1,34 @@
-import createContentValidator from './content'
+import ContentValidator from './content'
 
 const error = (rule) => ({
   rule,
   path: 'requestBody'
 })
 
-export default (requestBody, option) => {
-  const validator = requestBody.content ? createContentValidator(requestBody.content, option) : null
+export default class RequestBodyValidator {
+  constructor (requestBody, option) {
+    this.requestBody = requestBody
+    this.validator = requestBody.content ? new ContentValidator(requestBody.content, option) : null
+  }
 
-  return ({ value, mediaType } = {}) => {
+  validate ({ value, mediaType } = {}) {
     const errors = []
 
     if (value === undefined) {
-      if (requestBody.required) {
+      if (this.requestBody.required) {
         errors.push(error('requestBody-required'))
       }
 
       return errors
     }
 
-    if (!validator) {
+    if (!this.validator) {
       return errors
     }
 
     return [
       ...errors,
-      ...validator({ value, mediaType }).map(error => ({
+      ...this.validator.validate({ value, mediaType }).map(error => ({
         ...error,
         path: 'requestBody.' + error.path
       }))

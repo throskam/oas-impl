@@ -1,15 +1,18 @@
-import createResponsesCoercer from './coercers/responses'
+import ResponsesCoercer from './coercers/responses'
 
-export default (operation) => {
-  const responsesCoercer = operation.responses ? createResponsesCoercer(operation.responses) : null
+export default class ResponseCoercer {
+  constructor (operation) {
+    this.responsesCoercer = operation.responses ? new ResponsesCoercer(operation.responses) : null
+  }
 
-  return ({ header, content, mediaType, status } = {}) =>
-    responsesCoercer
-      ? responsesCoercer({ header, content, mediaType, status })
+  coerce ({ header, content, mediaType, status } = {}) {
+    return this.responsesCoercer
+      ? this.responsesCoercer.coerce({ header, content, mediaType, status })
       : (header === undefined && content === undefined
           ? undefined
           : {
               ...(header && { header }),
               ...(content && { content })
             })
+  }
 }

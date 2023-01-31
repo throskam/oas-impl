@@ -1,4 +1,4 @@
-import createHeadersValidator from './headers'
+import HeadersValidator from './headers'
 
 describe('Empty', () => {
   const headers = {
@@ -7,10 +7,10 @@ describe('Empty', () => {
     }
   }
 
-  const validator = createHeadersValidator(headers)
+  const validator = new HeadersValidator(headers)
 
   it('should return a required error', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 })
 
@@ -21,15 +21,15 @@ describe('Insensitive', () => {
     }
   }
 
-  const validator = createHeadersValidator(headers)
+  const validator = new HeadersValidator(headers)
 
   it('should return no errors when the header case match', () => {
     const payload = { header: { 'X-FoO-bAR': 1 } }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return no errors when the header case missmatch', () => {
     const payload = { header: { 'x-fOO-Bar': 1 } }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })

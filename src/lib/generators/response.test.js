@@ -1,12 +1,12 @@
-import createResponseGenerator from './response'
+import ResponseGenerator from './response'
 
 describe('Empty', () => {
   const response = {}
 
-  const generator = createResponseGenerator(response)
+  const generator = new ResponseGenerator(response)
 
   it('should return undefined when no content is defined', () => {
-    expect(generator()).toBeUndefined()
+    expect(generator.generate()).toBeUndefined()
   })
 })
 
@@ -22,11 +22,11 @@ describe('Headers', () => {
     }
   }
 
-  const generator = createResponseGenerator(response)
+  const generator = new ResponseGenerator(response)
 
   it('should return a header generated', () => {
     const expected = { header: { 'x-foo-bar': 1234 } }
-    expect(generator()).toEqual(expected)
+    expect(generator.generate()).toEqual(expected)
   })
 })
 
@@ -42,12 +42,12 @@ describe('Content', () => {
     }
   }
 
-  const generator = createResponseGenerator(response)
+  const generator = new ResponseGenerator(response)
 
   it('should return a content generated', () => {
     const payload = { mediaType: 'application/json' }
     const expected = { content: 1234 }
-    expect(generator(payload)).toEqual(expected)
+    expect(generator.generate(payload)).toEqual(expected)
   })
 })
 
@@ -71,11 +71,11 @@ describe('Headers & Content', () => {
     }
   }
 
-  const generator = createResponseGenerator(response)
+  const generator = new ResponseGenerator(response)
 
   it('should return a header generated', () => {
     const payload = { mediaType: 'application/json' }
     const expected = { header: { 'x-foo-bar': 1234 }, content: 1234 }
-    expect(generator(payload)).toEqual(expected)
+    expect(generator.generate(payload)).toEqual(expected)
   })
 })

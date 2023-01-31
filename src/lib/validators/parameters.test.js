@@ -1,4 +1,4 @@
-import createParametersValidator from './parameters'
+import ParametersValidator from './parameters'
 
 describe('Path', () => {
   const parameters = [{
@@ -7,7 +7,7 @@ describe('Path', () => {
     required: true
   }]
 
-  const validator = createParametersValidator(parameters)
+  const validator = new ParametersValidator(parameters)
 
   it('should return no errors when the value is defined', () => {
     const payload = {
@@ -16,11 +16,11 @@ describe('Path', () => {
       }
     }
 
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return required error when the value is missing', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 })
 
@@ -31,7 +31,7 @@ describe('Query', () => {
     required: true
   }]
 
-  const validator = createParametersValidator(parameters)
+  const validator = new ParametersValidator(parameters)
 
   it('should return no errors when the value is defined', () => {
     const payload = {
@@ -40,11 +40,11 @@ describe('Query', () => {
       }
     }
 
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return required error when the value is missing', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 })
 
@@ -55,7 +55,7 @@ describe('Header', () => {
     required: true
   }]
 
-  const validator = createParametersValidator(parameters)
+  const validator = new ParametersValidator(parameters)
 
   it('should return no errors when the value is defined', () => {
     const payload = {
@@ -64,11 +64,11 @@ describe('Header', () => {
       }
     }
 
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return required error when the value is missing', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 
   it('should return no errors when the header case missmatch', () => {
@@ -78,7 +78,7 @@ describe('Header', () => {
       }
     }
 
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })
 
@@ -89,7 +89,7 @@ describe('Cookie', () => {
     required: true
   }]
 
-  const validator = createParametersValidator(parameters)
+  const validator = new ParametersValidator(parameters)
 
   it('should return no errors when the value is defined', () => {
     const payload = {
@@ -98,10 +98,10 @@ describe('Cookie', () => {
       }
     }
 
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return required error when the value is missing', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 })

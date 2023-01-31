@@ -1,12 +1,12 @@
-import createSchemaGenerator from './schema'
+import SchemaGenerator from './schema'
 
 describe('Empty', () => {
   const schema = {}
 
-  const generator = createSchemaGenerator(schema)
+  const generator = new SchemaGenerator(schema)
 
   it('should return undefined when schema is empty', () => {
-    expect(generator()).toBeUndefined()
+    expect(generator.generate()).toBeUndefined()
   })
 })
 
@@ -15,11 +15,11 @@ describe('Example', () => {
     example: 1
   }
 
-  const generator = createSchemaGenerator(schema)
+  const generator = new SchemaGenerator(schema)
 
   it('should return the example value', () => {
     const expected = 1
-    expect(generator()).toEqual(expected)
+    expect(generator.generate()).toEqual(expected)
   })
 })
 
@@ -28,11 +28,11 @@ describe('Default', () => {
     default: 0
   }
 
-  const generator = createSchemaGenerator(schema)
+  const generator = new SchemaGenerator(schema)
 
   it('should return the default value', () => {
     const expected = 0
-    expect(generator()).toEqual(expected)
+    expect(generator.generate()).toEqual(expected)
   })
 })
 
@@ -45,11 +45,11 @@ describe('AllOf', () => {
     }]
   }
 
-  const generator = createSchemaGenerator(schema)
+  const generator = new SchemaGenerator(schema)
 
   it('should return the combined schema generated value', () => {
     const expected = 1
-    expect(generator()).toEqual(expected)
+    expect(generator.generate()).toEqual(expected)
   })
 })
 
@@ -62,11 +62,11 @@ describe('AnyOf', () => {
     }]
   }
 
-  const generator = createSchemaGenerator(schema)
+  const generator = new SchemaGenerator(schema)
 
   it('should return the first schema generated value', () => {
     const expected = 1
-    expect(generator()).toEqual(expected)
+    expect(generator.generate()).toEqual(expected)
   })
 })
 
@@ -79,11 +79,11 @@ describe('OneOf', () => {
     }]
   }
 
-  const generator = createSchemaGenerator(schema)
+  const generator = new SchemaGenerator(schema)
 
   it('should return the first schema generated value', () => {
     const expected = 1
-    expect(generator()).toEqual(expected)
+    expect(generator.generate()).toEqual(expected)
   })
 })
 
@@ -92,7 +92,7 @@ describe('Generator', () => {
     format: 'custom'
   }
 
-  const generator = createSchemaGenerator(schema, {
+  const generator = new SchemaGenerator(schema, {
     format: {
       custom: {
         generator: () => 1
@@ -102,7 +102,7 @@ describe('Generator', () => {
 
   it('should return the generated value', () => {
     const expected = 1
-    expect(generator()).toEqual(expected)
+    expect(generator.generate()).toEqual(expected)
   })
 })
 
@@ -112,11 +112,11 @@ describe('Sample', () => {
       enum: [1, 2]
     }
 
-    const generator = createSchemaGenerator(schema)
+    const generator = new SchemaGenerator(schema)
 
     it('should return the first enum value', () => {
       const expected = schema.enum[0]
-      expect(generator()).toEqual(expected)
+      expect(generator.generate()).toEqual(expected)
     })
   })
 
@@ -125,10 +125,10 @@ describe('Sample', () => {
       type: 'null'
     }
 
-    const generator = createSchemaGenerator(schema)
+    const generator = new SchemaGenerator(schema)
 
     it('should return null', () => {
-      expect(generator()).toBeNull()
+      expect(generator.generate()).toBeNull()
     })
   })
 
@@ -137,11 +137,11 @@ describe('Sample', () => {
       type: 'boolean'
     }
 
-    const generator = createSchemaGenerator(schema)
+    const generator = new SchemaGenerator(schema)
 
     it('should return true', () => {
       const expected = true
-      expect(generator()).toEqual(expected)
+      expect(generator.generate()).toEqual(expected)
     })
   })
 
@@ -151,11 +151,11 @@ describe('Sample', () => {
         type: 'integer'
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return 0', () => {
         const expected = 0
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
 
@@ -166,11 +166,11 @@ describe('Sample', () => {
         maximum: 10
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return the closest integer from 0 in between the minimum and maximum', () => {
         const expected = 0
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
 
@@ -183,11 +183,11 @@ describe('Sample', () => {
         exclusiveMaximum: true
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return the closest integer from 0 in between the excl. minimum and excl. maximum', () => {
         const expected = 1
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
 
@@ -198,11 +198,11 @@ describe('Sample', () => {
         multipleOf: 13
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return the closest integer from 10 multiple of 13', () => {
         const expected = 13
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
   })
@@ -213,11 +213,11 @@ describe('Sample', () => {
         type: 'number'
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return a number', () => {
         const expected = 0
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
 
@@ -228,11 +228,11 @@ describe('Sample', () => {
         maximum: 10.5
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return the closest number from 0 in between the minimum and maximum', () => {
         const expected = 0.5
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
 
@@ -243,11 +243,11 @@ describe('Sample', () => {
         multipleOf: 11.5
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return the closest number from 10 multiple of 13', () => {
         const expected = 11.5
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
   })
@@ -258,11 +258,11 @@ describe('Sample', () => {
         type: 'string'
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return a string', () => {
         const expected = expect.any(String)
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
 
@@ -273,11 +273,11 @@ describe('Sample', () => {
         maxLength: 200
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return a string with a length of 200', () => {
         const expected = 200
-        expect(generator().length).toEqual(expected)
+        expect(generator.generate().length).toEqual(expected)
       })
     })
 
@@ -287,11 +287,11 @@ describe('Sample', () => {
         format: 'hostname'
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return a string with the hostname format', () => {
         const expected = 'example.com'
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
   })
@@ -307,11 +307,11 @@ describe('Sample', () => {
         }
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return an object', () => {
         const expected = { foo: expect.any(String) }
-        expect(generator()).toStrictEqual(expected)
+        expect(generator.generate()).toStrictEqual(expected)
       })
     })
 
@@ -333,11 +333,11 @@ describe('Sample', () => {
         maxProperties: 2
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return an object with 2 properties', () => {
         const expected = { foo: expect.any(String), bar: expect.any(String) }
-        expect(generator()).toStrictEqual(expected)
+        expect(generator.generate()).toStrictEqual(expected)
       })
     })
 
@@ -355,11 +355,11 @@ describe('Sample', () => {
         }
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return an object ignoring write only properties', () => {
         const expected = { foo: expect.any(String) }
-        expect(generator()).toStrictEqual(expected)
+        expect(generator.generate()).toStrictEqual(expected)
       })
     })
   })
@@ -373,11 +373,11 @@ describe('Sample', () => {
         }
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return an array of length 1', () => {
         const expected = [1]
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
 
@@ -391,11 +391,11 @@ describe('Sample', () => {
         maxItems: 3
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return an array of length 2', () => {
         const expected = [1, 1]
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
 
@@ -413,11 +413,11 @@ describe('Sample', () => {
         maxItems: 3
       }
 
-      const generator = createSchemaGenerator(schema)
+      const generator = new SchemaGenerator(schema)
 
       it('should return an array of length 3', () => {
         const expected = [1, 2, 1]
-        expect(generator()).toEqual(expected)
+        expect(generator.generate()).toEqual(expected)
       })
     })
   })

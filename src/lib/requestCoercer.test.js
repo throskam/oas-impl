@@ -1,18 +1,18 @@
-import createRequestCoercer from './requestCoercer'
+import RequestCoercer from './requestCoercer'
 
 describe('Empty', () => {
   const operation = {}
 
-  const coercer = createRequestCoercer(operation)
+  const coercer = new RequestCoercer(operation)
 
   it('should return the original value when no coercion is needed', () => {
     const payload = { path: { param: 1 }, query: { param: 1 }, header: { 'x-foo-bar': 1 }, cookie: { name: 1 }, content: 'value', mediaType: 'application/json' }
     const expected = { path: { param: 1 }, query: { param: 1 }, header: { 'x-foo-bar': 1 }, cookie: { name: 1 }, content: 'value' }
-    expect(coercer(payload)).toEqual(expected)
+    expect(coercer.coerce(payload)).toEqual(expected)
   })
 
   it('should return undefined when the value is missing', () => {
-    expect(coercer()).toBeUndefined()
+    expect(coercer.coerce()).toBeUndefined()
   })
 })
 
@@ -27,12 +27,12 @@ describe('Parameters', () => {
     }]
   }
 
-  const coercer = createRequestCoercer(operation)
+  const coercer = new RequestCoercer(operation)
 
   it('should coerce parameters', () => {
     const payload = { query: { param: '1' }, mediaType: 'application/json' }
     const expected = { query: { param: 1 } }
-    expect(coercer(payload)).toStrictEqual(expected)
+    expect(coercer.coerce(payload)).toStrictEqual(expected)
   })
 })
 
@@ -49,12 +49,12 @@ describe('RequestBody', () => {
     }
   }
 
-  const coercer = createRequestCoercer(operation)
+  const coercer = new RequestCoercer(operation)
 
   it('should coerce both parameters and requestBody', () => {
     const payload = { content: '1', mediaType: 'application/json' }
     const expected = { content: 1 }
-    expect(coercer(payload)).toStrictEqual(expected)
+    expect(coercer.coerce(payload)).toStrictEqual(expected)
   })
 })
 
@@ -78,11 +78,11 @@ describe('Parameters & requestBody', () => {
     }
   }
 
-  const coercer = createRequestCoercer(operation)
+  const coercer = new RequestCoercer(operation)
 
   it('should coerce both parameters and requestBody', () => {
     const payload = { query: { param: '1' }, content: '1', mediaType: 'application/json' }
     const expected = { query: { param: 1 }, content: 1 }
-    expect(coercer(payload)).toStrictEqual(expected)
+    expect(coercer.coerce(payload)).toStrictEqual(expected)
   })
 })

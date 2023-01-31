@@ -1,60 +1,63 @@
-import createSchemaValidator from './schema'
-import createContentValidator from './content'
+import SchemaValidator from './schema'
+import ContentValidator from './content'
 
 const createFirstContentValidator = (content, option) => {
   const mediaType = Object.keys(content)[0]
-  const validator = createContentValidator(content, option)
+  const validator = new ContentValidator(content, option)
 
   return ({ value }) => {
-    return validator({ value, mediaType })
+    return validator.validate({ value, mediaType })
   }
 }
 
-export default (parameter, option) => {
-  const validator = parameter.content
-    ? createFirstContentValidator(parameter.content, option)
-    : parameter.schema
-      ? createSchemaValidator(parameter.schema, option)
-      : null
+export default class ParameterValidator {
+  constructor (parameter, option) {
+    this.parameter = parameter
+    this.validator = parameter.content
+      ? createFirstContentValidator(parameter.content, option)
+      : parameter.schema
+        ? payload => new SchemaValidator(parameter.schema, option).validate(payload)
+        : null
 
-  const error = (rule, value) => ({
-    rule,
-    path: 'parameter[' + parameter.name + ']',
-    ...(value !== undefined && { value })
-  })
+    this.error = (rule, value) => ({
+      rule,
+      path: 'parameter[' + parameter.name + ']',
+      ...(value !== undefined && { value })
+    })
+  }
 
-  return ({ value } = {}) => {
+  validate ({ value } = {}) {
     const errors = []
 
     if (value === undefined) {
-      if (parameter.required) {
-        errors.push(error('parameter-required'))
+      if (this.parameter.required) {
+        errors.push(this.error('parameter-required'))
       }
 
       return errors
     }
 
-    if (parameter.deprecated) {
-      errors.push(error('parameter-deprecated', value))
+    if (this.parameter.deprecated) {
+      errors.push(this.error('parameter-deprecated', value))
     }
 
     if (value === null) {
-      if (!parameter.allowEmptyValue) {
-        errors.push(error('parameter-deny-empty-value'))
+      if (!this.parameter.allowEmptyValue) {
+        errors.push(this.error('parameter-deny-empty-value'))
       }
 
       return errors
     }
 
-    if (!validator) {
+    if (!this.validator) {
       return errors
     }
 
     return [
       ...errors,
-      ...validator({ value }).map(error => ({
+      ...this.validator({ value }).map(error => ({
         ...error,
-        path: 'parameter[' + parameter.name + '].' + error.path
+        path: 'parameter[' + this.parameter.name + '].' + error.path
       }))
     ]
   }

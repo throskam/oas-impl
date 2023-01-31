@@ -1,4 +1,4 @@
-import parameterValidator from './parameter'
+import ParameterValidator from './parameter'
 
 describe('Required', () => {
   const parameter = {
@@ -6,29 +6,29 @@ describe('Required', () => {
     required: true
   }
 
-  const validator = parameterValidator(parameter)
+  const validator = new ParameterValidator(parameter)
 
   it('should return no errors when the value is defined', () => {
     const payload = { value: 1 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a required error when the value is missing', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 })
 
 describe('Optional', () => {
   const parameter = {}
-  const validator = parameterValidator(parameter)
+  const validator = new ParameterValidator(parameter)
 
   it('should return no errors when the value is defined', () => {
     const payload = { value: 1 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return no errors when the value is missing', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 })
 
@@ -41,21 +41,21 @@ describe('Schema', () => {
     }
   }
 
-  const validator = parameterValidator(parameter)
+  const validator = new ParameterValidator(parameter)
 
   it('should return no errors when the value is valid', () => {
     const payload = { value: 1 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a validation error when the value is invalid', () => {
     const payload = { value: 'string' }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a validation error when the value is null', () => {
     const payload = { value: null }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })
 
@@ -72,16 +72,16 @@ describe('Content', () => {
     }
   }
 
-  const validator = parameterValidator(parameter)
+  const validator = new ParameterValidator(parameter)
 
   it('should return no errors when the value is valid', () => {
     const payload = { value: 1 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a validation error when the value is invalid', () => {
     const payload = { value: 'string' }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })
 
@@ -95,25 +95,25 @@ describe('Deprecated', () => {
     }
   }
 
-  const validator = parameterValidator(parameter)
+  const validator = new ParameterValidator(parameter)
 
   it('should return no errors when the value is missing', () => {
-    expect(validator()).toMatchSnapshot()
+    expect(validator.validate()).toMatchSnapshot()
   })
 
   it('should return a deprecated error when the value is defined', () => {
     const payload = { value: 1 }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a deprecated error when the value is null', () => {
     const payload = { value: null }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 
   it('should return a deprecated error and validation errors when the value is defined and invalid', () => {
     const payload = { value: 'string' }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })
 
@@ -127,10 +127,10 @@ describe('Allow empty value', () => {
     }
   }
 
-  const validator = parameterValidator(parameter)
+  const validator = new ParameterValidator(parameter)
 
   it('should return no errors when the value is null', () => {
     const payload = { value: null }
-    expect(validator(payload)).toMatchSnapshot()
+    expect(validator.validate(payload)).toMatchSnapshot()
   })
 })

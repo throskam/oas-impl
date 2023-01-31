@@ -141,6 +141,13 @@ const generate = (schema, option) => {
   return undefined
 }
 
-export default (schema, option = {}) => {
-  return () => generate(schema, option)
+export default class SchemaGenerator {
+  constructor (schema, option = {}) {
+    this.schema = schema
+    this.option = option
+  }
+
+  generate () {
+    return generate(this.schema, this.option)
+  }
 }

@@ -1,19 +1,23 @@
-import createContentGenerator from './content'
-import createSchemaGenerator from './schema'
+import ContentGenerator from './content'
+import SchemaGenerator from './schema'
 
 const createFirstContentGenerator = (content, option) => {
   const mediaType = Object.keys(content)[0]
-  const generator = createContentGenerator(content, option)
+  const generator = new ContentGenerator(content, option)
 
-  return () => generator({ mediaType })
+  return () => generator.generate({ mediaType })
 }
 
-export default (parameter, option) => {
-  const generator = parameter.content
-    ? createFirstContentGenerator(parameter.content, option)
-    : parameter.schema
-      ? createSchemaGenerator(parameter.schema, option)
-      : null
+export default class ParameterGenerator {
+  constructor (parameter, option) {
+    this.generator = parameter.content
+      ? createFirstContentGenerator(parameter.content, option)
+      : parameter.schema
+        ? (payload) => new SchemaGenerator(parameter.schema, option).generate(payload)
+        : null
+  }
 
-  return () => generator ? generator() : undefined
+  generate () {
+    return this.generator ? this.generator() : undefined
+  }
 }
