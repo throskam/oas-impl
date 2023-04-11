@@ -2,21 +2,17 @@ import ContentCoercer from './content'
 import SchemaCoercer from './schema'
 import createParameterParser from './../utils/parameterParser'
 
-const createFirstContentCoercer = (content) => {
-  const mediaType = Object.keys(content)[0]
-  const coercer = new ContentCoercer(content)
-
-  return ({ value }) => coercer.coerce({ value, mediaType })
-}
-
 export default class ParameterCoercer {
   constructor (parameter) {
-    this.coercer = parameter.content
-      ? createFirstContentCoercer(parameter.content)
-      : parameter.schema
-        ? (payload) => (new SchemaCoercer(parameter.schema)).coerce(payload)
-        : null
+    this.parameter = parameter
 
+    if (parameter.content) {
+      this.coercer = new ContentCoercer(parameter.content)
+    } else if (parameter.schema) {
+      this.coercer = new SchemaCoercer(parameter.schema)
+    }
+
+    // TODO: move parser in this class.
     this.parser = createParameterParser(parameter)
   }
 
@@ -27,6 +23,14 @@ export default class ParameterCoercer {
 
     const parsed = this.parser(value)
 
-    return this.coercer ? this.coercer({ value: parsed }) : parsed
+    if (!this.coercer) {
+      return parsed
+    }
+
+    if (this.parameter.content) {
+      return this.coercer.coerce({ value: parsed, mediaType: Object.keys(this.parameter.content)[0] })
+    }
+
+    return this.coercer.coerce({ value: parsed })
   }
 }

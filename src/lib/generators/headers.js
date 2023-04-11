@@ -2,6 +2,7 @@ import ParameterGenerator from './parameter'
 
 export default class HeadersGenerator {
   constructor (headers, option) {
+    // TODO: remove function
     this.generators = Object.keys(headers).map(name => {
       const generator = new ParameterGenerator({ ...headers[name], name }, option)
 

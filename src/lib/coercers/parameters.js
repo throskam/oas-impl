@@ -6,6 +6,7 @@ import ParameterCoercer from './parameter'
 export default class ParametersCoercer {
   constructor (parameters) {
     this.parameters = parameters
+    // TODO: remove method
     this.coercers = parameters.map(parameter => {
       const coercer = new ParameterCoercer(parameter)
       const name = parameter.name

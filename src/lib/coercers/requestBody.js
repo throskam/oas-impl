@@ -6,6 +6,10 @@ export default class RequestBodyCoercer {
   }
 
   coerce ({ content, mediaType } = {}) {
-    return this.coercer ? this.coercer.coerce({ value: content, mediaType }) : content
+    if (!this.coercer) {
+      return content
+    }
+
+    return this.coercer.coerce({ value: content, mediaType })
   }
 }

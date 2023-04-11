@@ -8,16 +8,39 @@ export default class ResponseCoercer {
   }
 
   coerce ({ header, content, mediaType } = {}) {
-    const headers = this.headersCoercer ? this.headersCoercer.coerce({ header }) : header
-    const body = this.contentCoercer ? this.contentCoercer.coerce({ value: content, mediaType }) : content
+    const response = {
+      header: this.coerceHeader({ header }),
+      content: this.coerceContent({ content, mediaType })
+    }
 
-    if (headers === undefined && body === undefined) {
+    if (response.header === undefined) {
+      delete response.header
+    }
+
+    if (response.content === undefined) {
+      delete response.content
+    }
+
+    if (response.header === undefined && response.content === undefined) {
       return undefined
     }
 
-    return {
-      ...(headers !== undefined && { header: headers }),
-      ...(body !== undefined && { content: body })
+    return response
+  }
+
+  coerceHeader ({ header }) {
+    if (!this.headersCoercer) {
+      return header
     }
+
+    return this.headersCoercer.coerce({ header })
+  }
+
+  coerceContent ({ content, mediaType }) {
+    if (!this.contentCoercer) {
+      return content
+    }
+
+    return this.contentCoercer.coerce({ value: content, mediaType })
   }
 }

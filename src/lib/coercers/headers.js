@@ -6,8 +6,8 @@ import ParameterCoercer from './parameter'
 export default class HeadersCoercer {
   constructor (headers) {
     this.headers = headers
+    // TODO: create map instead of array.
     this.coercers = Object.keys(this.headers).map(name => {
-      // TODO: create header coercer
       const coercer = new ParameterCoercer({ ...headers[name], name })
 
       return header => ({ name, value: coercer.coerce({ value: header[name] }) })
